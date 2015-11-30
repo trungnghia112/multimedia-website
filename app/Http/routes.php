@@ -11,6 +11,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->welcome();
+$app->get('/admin', function () use ($app) {
+    return view('admin.master');
 });
