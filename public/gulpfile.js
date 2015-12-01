@@ -69,6 +69,7 @@ gulp.task('angularCoreMinJsAdmin', function() {
             path.bower + 'angular-resource/angular-resource.js',
             path.bower + 'angular-animate/angular-animate.js',
             path.bower + 'angular-cookies/angular-cookies.js',
+            path.bower + 'angular-messages/angular-messages.min.js',
             path.bower + 'angular-bootstrap/ui-bootstrap-tpls.js'
         ])
         .pipe(concat('angular-core.min.js'))
@@ -77,7 +78,11 @@ gulp.task('angularCoreMinJsAdmin', function() {
 });
 gulp.task('scriptsAdmin', function() {
     gulp.src([
-            path.baseAdmin + 'js/angular/**/*.js'
+            path.baseAdmin + 'js/angular/modules/**/*.js',
+            path.baseAdmin + 'js/angular/controllers/**/*.js',
+            path.baseAdmin + 'js/angular/directives/**/*.js',
+            path.baseAdmin + 'js/angular/factories/**/*.js',
+            path.baseAdmin + 'js/angular/services/**/*.js'
         ])
         .pipe(concat('angular-app.min.js'))
         .pipe(uglify())

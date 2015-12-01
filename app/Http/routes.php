@@ -11,6 +11,6 @@
 |
 */
 
-$app->get('/admin', function () use ($app) {
+$app->get('/admin/', function () use ($app) {
     return view('admin.master');
 });
