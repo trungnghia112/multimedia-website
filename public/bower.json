@@ -29,6 +29,7 @@
     "angular-cookies": "1.4.7",
     "startbootstrap-sb-admin-2": "~1.0.7",
     "angular-messages": "1.4.7",
-    "angular-ui-router": "~0.2.15"
+    "angular-ui-router": "~0.2.15",
+    "angular-sanitize": "~1.4.8"
   }
 }

@@ -2,39 +2,28 @@
     'use strict';
     angular.module('app', []);
     angular
-        .module('adminApp', ['ngRoute', 'ngCookies', 'ngResource', 'app', 'ngMessages', 'ui.bootstrap'])
+        .module('adminApp', ['ui.router', 'ngCookies', 'ngResource', 'app', 'ngMessages', 'ui.bootstrap', 'ngSanitize'])
         .config(config)
         .run(run);
 
-    config.$inject = ['$routeProvider', '$locationProvider'];
-    function config($routeProvider, $locationProvider) {
-        $routeProvider
-            .when('/login', {
-                controller: 'LoginController',
-                templateUrl: viewsUrl + 'auth/login.html',
-                controllerAs: 'vm'
+    config.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function config($stateProvider, $urlRouterProvider) {
+        // Redirect any unmatched url
+        $urlRouterProvider.otherwise("/dashboard");
+
+        $stateProvider
+            .state('login', {
+                url: "/login",
+                templateUrl: viewsUrl + "auth/login.template.html",
+                data: {pageTitle: 'Sign in'},
+                controller: "AuthController"
             })
-            .when('/', {
-                controller: 'DashboardController',
-                templateUrl: viewsUrl + 'dashboard/index.html',
-                controllerAs: 'vm'
-            })
-            .when('/pages', {
-                controller: 'PagesController',
-                templateUrl: viewsUrl + 'pages/index.html',
-                controllerAs: 'vm'
-            })
-            .when('/pages/:pageId', {
-                controller: 'PagesController',
-                templateUrl: viewsUrl + 'pages/details.html',
-                controllerAs: 'vm'
-            })
-            .when('/settings', {
-                controller: 'SettingsController',
-                templateUrl: viewsUrl + 'settings/index.html',
-                controllerAs: 'vm'
-            })
-            .otherwise({ redirectTo: '/' });
+            .state('dashboard', {
+                url: "/dashboard",
+                templateUrl: viewsUrl + "auth/login.template.html",
+                data: {pageTitle: 'Dashboard'},
+                //controller: "GeneralPageController",
+            });
     }
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http', 'SettingsFactory'];
@@ -54,11 +43,11 @@
             }
         });
 
-        $rootScope.$on('$routeChangeSuccess', function () {
+        SettingsFactory.defineSettings();
+
+        $rootScope.$on('$stateChangeSuccess', function(){
             $rootScope.settings.layout.loading = false;
         });
-
-        SettingsFactory.defineSettings();
 
         /*Show - Hide loading state*/
         $rootScope.toggleLoadingState = function()

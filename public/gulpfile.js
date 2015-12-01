@@ -65,11 +65,12 @@ gulp.task('angularCoreMinJsAdmin', function() {
     gulp.src([
             path.bower + 'angular/angular.js',
             path.bower + 'angular-mocks/angular-mocks.js',
-            path.bower + 'angular-route/angular-route.js',
+            path.bower + 'angular-ui-router/release/angular-ui-router.min.js',
             path.bower + 'angular-resource/angular-resource.js',
             path.bower + 'angular-animate/angular-animate.js',
             path.bower + 'angular-cookies/angular-cookies.js',
             path.bower + 'angular-messages/angular-messages.min.js',
+            path.bower + 'angular-sanitize/angular-sanitize.min.js',
             path.bower + 'angular-bootstrap/ui-bootstrap-tpls.js'
         ])
         .pipe(concat('angular-core.min.js'))

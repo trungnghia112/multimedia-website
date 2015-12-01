@@ -40,7 +40,7 @@
     </script>
 </head>
 
-<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md"
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-md @{{ bodyClass }}"
       ng-class="{'on-loading': settings.layout.loading}">
 
 <!-- Loading state -->
@@ -50,6 +50,7 @@
 <!-- BEGIN HEADER -->
 <div class="page-header navbar navbar-fixed-top"
      ng-controller="HeaderController"
+     ng-if="!settings.layout.isLogin"
      ng-include="'/views/admin/inc/header.template.html'"></div>
 <!-- END HEADER -->
 
@@ -58,16 +59,17 @@
 <!-- END HEADER & CONTENT DIVIDER -->
 
 <!-- BEGIN CONTAINER -->
-<div class="page-container">
+<div class="" ng-class="{'page-container': !settings.layout.isLogin}">
     <!-- BEGIN SIDEBAR -->
     <div class="page-sidebar-wrapper"
          ng-controller="SidebarController"
+         ng-if="!settings.layout.isLogin"
          ng-include="'/views/admin/inc/sidebar.template.html'"></div>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
-    <div class="page-content-wrapper">
+    <div class="" ng-class="{'page-content-wrapper': !settings.layout.isLogin}">
         <!-- BEGIN CONTENT BODY -->
-        <div class="page-content">
+        <div class="" ng-class="{'page-content': !settings.layout.isLogin}">
             <!-- BEGIN ACTUAL CONTENT -->
             <div ui-view class="fade-in-up"></div>
             <!-- END ACTUAL CONTENT -->
@@ -81,6 +83,7 @@
 <!-- BEGIN FOOTER -->
 <div class="page-footer"
      ng-controller="FooterController"
+     ng-if="!settings.layout.isLogin"
      ng-include="'/views/admin/inc/footer.template.html'"></div>
 <!-- END FOOTER -->
 
@@ -98,7 +101,7 @@
 <script src="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="{{ url('theme/admin/assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/scripts/app.js') }}" type="text/javascript"></script>
 
 <script src="{{ url('assets/admin/dist/angular-core.min.js') }}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->

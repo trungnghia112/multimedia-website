@@ -16,7 +16,14 @@
         function defineSettings() {
             var settings = {
                 layout: {
-                    loading: true
+                    loading: true,
+                    isLogin: true
+                },
+                url : {
+                    baseUrl: baseUrl,
+                    assetsUrl: assetsUrl,
+                    templatesUrl: templatesUrl,
+                    viewsUrl: viewsUrl
                 }
             };
             $rootScope.settings = settings;
