@@ -37,7 +37,6 @@
 
         function showForm(type)
         {
-            console.log(type);
             vm.currentForm = type || 'login';
         }
     }

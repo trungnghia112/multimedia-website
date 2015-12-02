@@ -14,3 +14,20 @@
 $app->get('/admin/', function () use ($app) {
     return view('admin.master');
 });
+
+/*
+|--------------------------------------------------------------------------
+| START Routes for API actions
+|--------------------------------------------------------------------------
+*/
+$app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function($app) {
+    /*User*/
+    $app->group(['prefix' => 'api/users', 'namespace' => 'App\Http\Controllers\Api'], function($app){
+        $app->post('/authenticate', 'ApiUserController@authenticate');
+    });
+});
+/*
+|--------------------------------------------------------------------------
+| END Routes for API actions
+|--------------------------------------------------------------------------
+*/

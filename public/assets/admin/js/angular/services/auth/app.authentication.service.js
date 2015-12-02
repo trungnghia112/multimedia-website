@@ -5,8 +5,8 @@
         .module('app')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', '$timeout', 'UserService'];
-    function AuthenticationService($http, $cookieStore, $rootScope, $timeout, UserService) {
+    AuthenticationService.$inject = ['$http', '$cookieStore', '$rootScope', 'UserService'];
+    function AuthenticationService($http, $cookieStore, $rootScope, UserService) {
         var service = {};
 
         service.login = login;
@@ -17,7 +17,7 @@
 
         function login(username, password, callback, callbackError)
         {
-            UserService.AuthUser(username, password, callback, callbackError);
+            UserService.authUser(username, password, callback, callbackError);
         }
 
         function setCredentials(username, password) {

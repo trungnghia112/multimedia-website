@@ -36,7 +36,8 @@
         var baseUrl = '{{ url('') }}/',
             assetsUrl  = '{{ url('assets') }}/',
             templatesUrl  = '{{ url('templates/admin') }}/',
-            viewsUrl  = '{{ url('views/admin') }}/';
+            viewsUrl  = '{{ url('views/admin') }}/',
+            baseApi = '{{ url('api') }}/';
     </script>
 </head>
 
