@@ -15,29 +15,29 @@
     <meta content="" name="author"/>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/plugins') }}/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/plugins') }}/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/plugins') }}/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/plugins') }}/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/plugins') }}/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/plugins/font-awesome/css/font-awesome.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/plugins/simple-line-icons/simple-line-icons.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/plugins/bootstrap/css/bootstrap.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/plugins/uniform/css/uniform.default.css', [], true) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
     <!-- BEGIN THEME GLOBAL STYLES -->
-    <link href="{{ url('theme/admin/assets/global/css/components-md.min.css') }}" rel="stylesheet" id="style_components" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/global/css/plugins-md.min.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/css/components-md.min.css', [], true) }}" rel="stylesheet" id="style_components" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/global/css/plugins-md.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
     <!-- BEGIN THEME LAYOUT STYLES -->
-    <link href="{{ url('theme/admin/assets/layouts/layout/css/layout.min.css') }}" rel="stylesheet" type="text/css"/>
-    <link href="{{ url('theme/admin/assets/layouts/layout/css/themes/darkblue.min.css') }}" rel="stylesheet" type="text/css" id="style_color"/>
-    <link href="{{ url('assets/admin/css/style.css') }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/layouts/layout/css/layout.min.css', [], true) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ url('theme/admin/assets/layouts/layout/css/themes/darkblue.min.css', [], true) }}" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="{{ url('assets/admin/css/style.css', [], true) }}" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
-    <link rel="shortcut icon" href="{{ url('favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ url('favicon.ico', [], true) }}"/>
 
     <script type="text/javascript">
-        var baseUrl = '{{ url('') }}/',
-            assetsUrl  = '{{ url('assets') }}/',
-            templatesUrl  = '{{ url('templates/admin') }}/',
-            viewsUrl  = '{{ url('views/admin') }}/',
-            baseApi = '{{ url('api') }}/';
+        var baseUrl = '{{ url('', [], true) }}/',
+            assetsUrl  = '{{ url('assets', [], true) }}/',
+            templatesUrl  = '{{ url('templates/admin', [], true) }}/',
+            viewsUrl  = '{{ url('views/admin', [], true) }}/',
+            baseApi = '{{ url('api', [], true) }}/';
     </script>
 </head>
 
@@ -89,28 +89,28 @@
 <!-- END FOOTER -->
 
 <!--[if lt IE 9]>
-<script src="{{ url('theme/admin/assets/global/plugins/respond.min.js') }}"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/excanvas.min.js') }}"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/respond.min.js', [], true) }}"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/excanvas.min.js', [], true) }}"></script>
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
-<script src="{{ url('assets/admin/dist/core.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/dist/core.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/js.cookie.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/jquery.blockui.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/uniform/jquery.uniform.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js', [], true) }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
-<script src="{{ url('theme/admin/assets/global/scripts/app.js') }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/global/scripts/app.js', [], true) }}" type="text/javascript"></script>
 
-<script src="{{ url('assets/admin/dist/angular-core.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/dist/angular-core.min.js', [], true) }}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="{{ url('theme/admin/assets/layouts/layout/scripts/layout.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/admin/dist/app.min.js') }}" type="text/javascript"></script>
-<script src="{{ url('assets/admin/dist/angular-app.min.js') }}" type="text/javascript"></script>
+<script src="{{ url('theme/admin/assets/layouts/layout/scripts/layout.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/dist/app.min.js', [], true) }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/dist/angular-app.min.js', [], true) }}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->
 </body>
 
