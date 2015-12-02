@@ -15,15 +15,11 @@
         return service;
 
         function getAll(callback, callbackError) {
-            return $http.get(baseApi + 'users').success(callback).error(callbackError);
+            return $http.get(baseApi + 'users').then(callback, callbackError);
         }
 
-        function authUser(username, password, callback, callbackError) {
-            $http.post(baseApi + 'users/authenticate', { username: username, password: password }).success(function (response) {
-                if(callback) callback(response);
-            }).error(function(response){
-                if(callbackError) callbackError(response);
-            });
+        function authUser(email, password, callback, callbackError) {
+            return $http.post(baseApi + 'users/authenticate', { email: email, password: password }).then(callback, callbackError);
         }
     }
 })();

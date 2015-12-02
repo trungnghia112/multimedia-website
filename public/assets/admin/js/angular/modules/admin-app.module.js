@@ -15,24 +15,26 @@
             .state('login', {
                 url: "/login",
                 templateUrl: viewsUrl + "auth/login.template.html",
-                data: {pageTitle: 'Sign in'},
                 controller: "AuthController",
-                controllerAs:"vm"
+                controllerAs: "vm"
             })
             .state('dashboard', {
                 url: "/dashboard",
-                templateUrl: viewsUrl + "auth/login.template.html",
-                data: {pageTitle: 'Dashboard'},
-                //controller: "GeneralPageController",
+                templateUrl: viewsUrl + "dashboard/dashboard.template.html",
+                controller: "DashboardController",
+                controllerAs: "vm"
             });
     }
 
     run.$inject = ['$rootScope', '$location', '$cookieStore', '$http', 'SettingsFactory'];
     function run($rootScope, $location, $cookieStore, $http, SettingsFactory) {
+        SettingsFactory.defineSettings();
+
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+            $rootScope.settings.layout.isLogin = false;
         }
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -43,8 +45,6 @@
                 $location.path('/login');
             }
         });
-
-        SettingsFactory.defineSettings();
 
         $rootScope.$on('$stateChangeSuccess', function(){
             $rootScope.settings.layout.loading = false;

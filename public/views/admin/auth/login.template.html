@@ -8,7 +8,7 @@
         <h3 class="form-title font-green">Sign In</h3>
         <div class="alert alert-danger"
              ng-show="vm.error"
-             ng-bind="vm.errorMessage">
+             ng-bind="'Wrong email or password!'">
         </div>
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -19,7 +19,7 @@
                    placeholder="Email"
                    ng-model="vm.email"
                    required
-                   name="username"/>
+                   name="email"/>
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Password</label>

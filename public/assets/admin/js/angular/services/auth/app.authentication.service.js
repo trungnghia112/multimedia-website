@@ -15,9 +15,9 @@
 
         return service;
 
-        function login(username, password, callback, callbackError)
+        function login(email, password, callback, callbackError)
         {
-            UserService.authUser(username, password, callback, callbackError);
+            return UserService.authUser(email, password, callback, callbackError);
         }
 
         function setCredentials(username, password) {
@@ -32,12 +32,16 @@
 
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authData;
             $cookieStore.put('globals', $rootScope.globals);
+
+            $rootScope.settings.layout.isLogin = false;
         }
 
         function clearCredentials() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic';
+
+            $rootScope.settings.layout.isLogin = true;
         }
     }
 

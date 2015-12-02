@@ -25,13 +25,12 @@
 
         function login() {
             $rootScope.showLoadingState();
-            AuthenticationService.login(vm.username, vm.password, function (response){
-                AuthenticationService.setCredentials(vm.username, vm.password);
+            AuthenticationService.login(vm.email, vm.password, function (response){
+                AuthenticationService.setCredentials(vm.email, vm.password);
                 $location.path('/');
             }, function(response){
                 $rootScope.hideLoadingState();
                 vm.error = response.error;
-                vm.errorMessage = response.message;
             });
         }
 

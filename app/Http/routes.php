@@ -23,7 +23,7 @@ $app->get('/admin/', function () use ($app) {
 $app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function($app) {
     /*User*/
     $app->group(['prefix' => 'api/users', 'namespace' => 'App\Http\Controllers\Api'], function($app){
-        $app->post('/authenticate', 'ApiUserController@authenticate');
+        $app->post('/authenticate', 'ApiUserController@postAuthenticate');
     });
 });
 /*
