@@ -16,7 +16,8 @@
                 url: "/login",
                 templateUrl: viewsUrl + "auth/login.template.html",
                 data: {pageTitle: 'Sign in'},
-                controller: "AuthController"
+                controller: "AuthController",
+                controllerAs:"vm"
             })
             .state('dashboard', {
                 url: "/dashboard",

@@ -10,15 +10,16 @@
         var vm = this;
 
         vm.login = login;
+        vm.showForm = showForm;
+
+        vm.currentForm = 'login';
 
         (function initController() {
-            // reset login status
-            AuthenticationService.clearCredentials();
+            AuthenticationService.clearCredentials(); // reset login status
             $rootScope.bodyClass = 'page page-login';
 
             $scope.$on('$viewContentLoaded', function() {
-                // initialize core components
-                App.initAjax();
+                App.initAjax(); // initialize core components
             });
         })();
 
@@ -32,6 +33,12 @@
                 vm.error = response.error;
                 vm.errorMessage = response.message;
             });
+        }
+
+        function showForm(type)
+        {
+            console.log(type);
+            vm.currentForm = type || 'login';
         }
     }
 })();
