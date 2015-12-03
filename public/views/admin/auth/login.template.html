@@ -35,12 +35,14 @@
             <button type="submit"
                     ng-disabled="loginForm.$invalid"
                     class="btn green uppercase">Login</button>
-            <a href="javascript:;" ng-click="vm.showForm('forget-password')" id="forget-password" class="forget-password">Forgot Password?</a>
+            <button ng-click="vm.showForm('forget-password')"
+                    type="button"
+                    class="forget-password btn btn-link">Forgot Password?</button>
         </div>
         <div class="create-account">
-            <p>
-                <a href="javascript:;" ng-click="vm.showForm('register')" id="register-btn" class="uppercase">Create an account</a>
-            </p>
+            <button ng-click="vm.showForm('register')"
+                    type="button"
+                    class="uppercase btn btn-link">Create an account</button>
         </div>
     </form>
     <!-- END LOGIN FORM -->
@@ -61,7 +63,7 @@
     <!-- END FORGOT PASSWORD FORM -->
     <!-- BEGIN REGISTRATION FORM -->
     <form class="register-form" ng-class="{'active': vm.currentForm == 'register'}">
-        <h3 class="font-green">Registr</h3>
+        <h3 class="font-green">Register</h3>
 
         <p class="hint"> Enter your personal details below: </p>
 

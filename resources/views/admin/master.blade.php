@@ -92,23 +92,17 @@
 <script src="{{ url('theme/admin/assets/global/plugins/respond.min.js', [], env('APP_HTTPS', false)) }}"></script>
 <script src="{{ url('theme/admin/assets/global/plugins/excanvas.min.js', [], env('APP_HTTPS', false)) }}"></script>
 <![endif]-->
+
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{ url('assets/admin/dist/core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/js.cookie.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/jquery.blockui.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/uniform/jquery.uniform.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-<script src="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/dist/angular-core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
+
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{ url('theme/admin/assets/global/scripts/app.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
-
-<script src="{{ url('assets/admin/dist/angular-core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
-<script src="{{ url('theme/admin/assets/layouts/layout/scripts/layout.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <script src="{{ url('assets/admin/dist/app.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <script src="{{ url('assets/admin/dist/angular-app.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <!-- END THEME LAYOUT SCRIPTS -->

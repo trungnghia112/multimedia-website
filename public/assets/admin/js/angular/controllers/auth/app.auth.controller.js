@@ -16,7 +16,9 @@
 
         (function initController() {
             AuthenticationService.clearCredentials(); // reset login status
-            $rootScope.bodyClass = 'page page-login';
+
+            $rootScope.pageTitle = 'Sign in';
+            $rootScope.bodyClass = 'page page-auth page-login';
 
             $scope.$on('$viewContentLoaded', function() {
                 App.initAjax(); // initialize core components
@@ -36,7 +38,26 @@
 
         function showForm(type)
         {
-            vm.currentForm = type || 'login';
+            type = type || 'login';
+            switch (type)
+            {
+                case 'login':
+                {
+                    $rootScope.pageTitle = 'Sign in';
+                    $rootScope.bodyClass = 'page page-auth page-login';
+                } break;
+                case 'register':
+                {
+                    $rootScope.pageTitle = 'Register';
+                    $rootScope.bodyClass = 'page page-auth page-register';
+                } break;
+                case 'forget-password':
+                {
+                    $rootScope.pageTitle = 'Sign in';
+                    $rootScope.bodyClass = 'page page-auth page-forgot-password';
+                } break;
+            }
+            vm.currentForm = type;
         }
     }
 })();

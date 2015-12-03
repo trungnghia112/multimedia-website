@@ -7,7 +7,9 @@ var path = {
     bower: './bower_components/',
     npm: './node_modules/',
     core: './assets/core/',
-    coreThirdParty: './assets/core/third_party/'
+    coreThirdParty: './assets/core/third_party/',
+    themeAdminAssets: './theme/admin/assets/',
+    themeAdminPlugins: './theme/admin/assets/global/plugins/'
 };
 
 var gulp = require("gulp");
@@ -47,7 +49,13 @@ gulp.task('coreMinJsAdmin', function() {
             path.bower + 'jquery/dist/jquery.min.js',
             path.bower + 'jquery-placeholder/jquery.placeholder.min.js',
             path.bower + 'modernizr/modernizr.js',
-            path.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js'
+            path.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
+            path.themeAdminPlugins + 'js.cookie.min.js',
+            path.themeAdminPlugins + 'bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js',
+            path.themeAdminPlugins + 'jquery-slimscroll/jquery.slimscroll.min.js',
+            path.themeAdminPlugins + 'jquery.blockui.min.js',
+            path.themeAdminPlugins + 'uniform/jquery.uniform.min.js',
+            path.themeAdminPlugins + 'bootstrap-switch/js/bootstrap-switch.min.js'
         ])
         .pipe(concat('core.min.js'))
         .pipe(uglify())
@@ -55,6 +63,7 @@ gulp.task('coreMinJsAdmin', function() {
 });
 gulp.task('appMinJsAdmin', function() {
     gulp.src([
+            path.themeAdminAssets + 'layouts/layout/scripts/layout.js',
             path.baseAdmin + 'js/*.js'
         ])
         .pipe(concat('app.min.js'))
@@ -66,11 +75,12 @@ gulp.task('angularCoreMinJsAdmin', function() {
             path.bower + 'angular/angular.js',
             path.bower + 'angular-mocks/angular-mocks.js',
             path.bower + 'angular-ui-router/release/angular-ui-router.min.js',
-            //path.bower + 'angular-resource/angular-resource.js',
+            path.bower + 'angular-resource/angular-resource.js',
             path.bower + 'angular-animate/angular-animate.js',
             path.bower + 'angular-cookies/angular-cookies.js',
             path.bower + 'angular-messages/angular-messages.min.js',
             path.bower + 'angular-sanitize/angular-sanitize.min.js',
+            path.bower + 'angular-touch/angular-touch.min.js',
             path.bower + 'angular-bootstrap/ui-bootstrap-tpls.js'
         ])
         .pipe(concat('angular-core.min.js'))

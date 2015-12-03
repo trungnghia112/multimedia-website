@@ -23,6 +23,12 @@
                 templateUrl: viewsUrl + "dashboard/dashboard.template.html",
                 controller: "DashboardController",
                 controllerAs: "vm"
+            })
+            .state('pages', {
+                url: "/pages",
+                templateUrl: viewsUrl + "pages/pages.template.html",
+                controller: "PagesController",
+                controllerAs: "vm"
             });
     }
 
@@ -33,7 +39,7 @@
         // keep user logged in after page refresh
         $rootScope.globals = $cookieStore.get('globals') || {};
         if ($rootScope.globals.currentUser) {
-            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata;
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authData;
             $rootScope.settings.layout.isLogin = false;
         }
 
@@ -48,6 +54,7 @@
 
         $rootScope.$on('$stateChangeSuccess', function(){
             $rootScope.settings.layout.loading = false;
+            Layout.setSidebarMenuActiveLink('match'); // init sidebar active links
         });
 
         /*Show - Hide loading state*/

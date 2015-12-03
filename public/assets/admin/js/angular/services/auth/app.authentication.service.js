@@ -20,12 +20,12 @@
             return UserService.authUser(email, password, callback, callbackError);
         }
 
-        function setCredentials(username, password) {
-            var authData = Base64.encode(username + ':' + password);
+        function setCredentials(email, password) {
+            var authData = Base64.encode(email + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    email: email,
                     authData: authData
                 }
             };

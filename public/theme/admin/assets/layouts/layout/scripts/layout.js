@@ -50,13 +50,16 @@ var Layout = function () {
 
     // Handle sidebar menu links
     var handleSidebarMenuActiveLink = function(mode, el) {
-        var url = location.hash.toLowerCase();    
+        var url = location.hash.toLowerCase();
 
         var menu = $('.page-sidebar-menu');
 
-        if (mode === 'click' || mode === 'set') {
+        if (mode === 'click' || mode === 'set')
+        {
             el = $(el);
-        } else if (mode === 'match') {
+        }
+        else if (mode === 'match')
+        {
             menu.find("li > a").each(function() {
                 var path = $(this).attr("href").toLowerCase();       
                 // url match condition         
@@ -567,8 +570,8 @@ var Layout = function () {
             handleSidebarMenu(); // handles main menu
             handleSidebarToggler(); // handles sidebar hide/show
 
-            if (App.isAngularJsApp()) {      
-                handleSidebarMenuActiveLink('match'); // init sidebar active links 
+            if (App.isAngularJsApp()) {
+                handleSidebarMenuActiveLink('match'); // init sidebar active links
             }
 
             App.addResizeHandler(handleFixedSidebar); // reinitialize fixed sidebar on window resize
