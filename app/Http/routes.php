@@ -25,6 +25,12 @@ $app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], func
     $app->group(['prefix' => 'api/users', 'namespace' => 'App\Http\Controllers\Api'], function($app){
         $app->post('/authenticate', 'ApiUserController@postAuthenticate');
     });
+
+    /*Page*/
+    $app->group(['prefix' => 'api/pages', 'namespace' => 'App\Http\Controllers\Api'], function($app){
+        $app->get('/', 'ApiPageController@index');
+        $app->get('/{id}', 'ApiPageController@show');
+    });
 });
 /*
 |--------------------------------------------------------------------------

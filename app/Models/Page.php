@@ -3,7 +3,7 @@ namespace App\Models;
 
 use App\Models\AbstractModel;
 
-class User extends AbstractModel
+class Page extends AbstractModel
 {
     public function __construct()
     {
@@ -14,13 +14,9 @@ class User extends AbstractModel
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'pages';
 
     protected $primaryKey = 'id';
 
-    public static function getUserByEmail($email)
-    {
-        $user = static::where('email', '=', $email)->first();
-        return $user;
-    }
+
 }
