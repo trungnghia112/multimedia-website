@@ -93,28 +93,24 @@ class Page extends AbstractModel
             ->where('language_id', '=', $languageId)->first();
 
         $dataUpdateContent = [];
-        $pageContent->language_id = $data['language_id'];
-        $pageContent->title = $data['title'];
-        $pageContent->slug = $data['slug'];
 
-        dd($pageContent->save());
-//            foreach($data as $keyContent => $rowContent)
-//            {
-//                if(in_array($keyContent, static::$acceptableEditContent))
-//                {
-//                    //$dataUpdateContent[$keyContent] = $rowContent;
-//                    $pageContent->$keyContent = $rowContent;
-//
-//                    /*Special fields*/
-//                    if($keyContent == 'slug')
-//                    {
-//                        //$dataUpdateContent[$keyContent] = str_slug($rowContent);
-//                        $pageContent->$keyContent = str_slug($rowContent);
-//                    }
-//                }
-//            }
-        //if(!$pageContent->update($dataUpdateContent))
-        if(!$pageContent->save())
+        foreach($data as $keyContent => $rowContent)
+        {
+            if(in_array($keyContent, static::$acceptableEditContent))
+            {
+                //$dataUpdateContent[$keyContent] = $rowContent;
+                $dataUpdateContent[$keyContent] = $rowContent;
+
+                /*Special fields*/
+                if($keyContent == 'slug')
+                {
+                    //$dataUpdateContent[$keyContent] = str_slug($rowContent);
+                    $dataUpdateContent[$keyContent] = str_slug($rowContent);
+                }
+            }
+        }
+
+        if(!$pageContent->update($dataUpdateContent))
         {
             $result['error_update_content'] = true;
             $result['response_code'] = 500;
