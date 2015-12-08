@@ -90,7 +90,7 @@ class Page extends AbstractModel
 
         /*Update page content*/
         $pageContent = Models\PageContent::where('page_id', '=', $id)
-            ->where('language_id', '=', $languageId)->first();
+            ->where('language_id', '=', $languageId);
 
         $dataUpdateContent = [];
 
