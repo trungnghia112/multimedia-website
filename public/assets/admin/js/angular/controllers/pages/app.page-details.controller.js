@@ -5,14 +5,15 @@
         .module('app')
         .controller('PageDetailsController', PageDetailsController);
 
-    PageDetailsController.$inject = ['$rootScope', '$scope', 'PageService', '$stateParams'];
-    function PageDetailsController($rootScope, $scope, PageService, $stateParams) {
+    PageDetailsController.$inject = ['$rootScope', '$scope', 'PageService', '$state', '$stateParams'];
+    function PageDetailsController($rootScope, $scope, PageService, $state, $stateParams) {
         var vm = this;
 
-        vm.updatePage = updatePage;
+        vm.updatePageContent = updatePageContent;
+        vm.changeLanguage = changeLanguage;
 
-        vm.pageId = $stateParams.id;
-        vm.langId = $stateParams.lang;
+        vm.pageId = parseInt($stateParams.id);
+        vm.langId = parseInt($stateParams.lang);
         vm.currentObj = null;
 
         (function initController() {
@@ -27,28 +28,47 @@
         {
             $rootScope.bodyClass = 'page page-page-edit';
             $rootScope.pageTitle = 'Edit page';
-
-            getPage();
+            $rootScope.showLoadingState();
+            getPage(function(){
+                $rootScope.hideLoadingState();
+            }, function(){
+                $rootScope.hideLoadingState();
+            });
         }
 
-        function getPage()
+        function getPage(callback, callbackError)
         {
             PageService.get(vm.pageId, vm.langId, function(response){
                 /*Successful*/
                 vm.currentObj = response.data.data;
-                $rootScope.pageTitle += ' - ' + vm.currentObj.global_title;
+                if(callback) callback();
             }, function(response){
-
+                if(callbackError) callbackError();
             });
         }
 
-        function updatePage()
+        function updatePageContent()
         {
+            $rootScope.showLoadingState();
             PageService.update(vm.pageId, vm.langId, vm.currentObj, function(response){
-
+                getPage(function(){
+                    $rootScope.hideLoadingState();
+                }, function(){
+                    $rootScope.hideLoadingState();
+                });
             }, function(response){
-
+                $rootScope.hideLoadingState();
             });
+        }
+
+        function changeLanguage()
+        {
+            setTimeout(function(){
+                return $state.go('pageDetails', {
+                    id: vm.pageId,
+                    lang: vm.langId
+                });
+            }, 100);
         }
     }
 })();

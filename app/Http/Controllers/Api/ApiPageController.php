@@ -18,7 +18,7 @@ class ApiPageController extends BaseController
         ];
     }
 
-    public function index(Request $request)
+    public function getIndex(Request $request)
     {
         $pages = Models\Page::getAll($request->get('page', 1));
         $this->data = [
@@ -29,24 +29,32 @@ class ApiPageController extends BaseController
         return response()->json($this->data, $this->data['response_code']);
     }
 
-    public function show(Request $request, $id, $language)
+    public function getDetails(Request $request, $id, $language)
     {
+        $this->data = [
+            'error' => false,
+            'response_code' => 200
+        ];
         $page = Models\Page::getPageById($id, $language);
-        if($page)
+
+        /*Create new if not exists*/
+        if(!$page)
         {
-            $this->data = [
-                'error' => false,
-                'response_code' => 200,
-                'data' => $page->toArray()
-            ];
+            $page = new Models\PageContent();
+            $page->language_id = $language;
+            $page->page_id = $id;
+            $page->save();
+            $page = Models\Page::getPageById($id, $language);
         }
+
+        $this->data['data'] = $page->toArray();
         return response()->json($this->data, $this->data['response_code']);
     }
 
-    public function edit(Request $request, $id, $language)
+    public function postEdit(Request $request, $id, $language)
     {
         $data = $request->all();
-        $result = Models\Page::updatePage($id, $language, $data);
+        $result = Models\Page::updatePageContent($id, $language, $data);
         return response()->json($result, $result['response_code']);
     }
 }

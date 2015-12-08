@@ -30,7 +30,7 @@
                 controller: "PagesController",
                 controllerAs: "vm"
             })
-            .state('pagesDetails', {
+            .state('pageDetails', {
                 url: "/pages/{id:[0-9]*}/{lang:[0-9]*}",
                 templateUrl: viewsUrl + "pages/page-details.template.html",
                 controller: "PageDetailsController",

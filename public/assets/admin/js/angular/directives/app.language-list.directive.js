@@ -8,24 +8,26 @@
     function languageList() {
         return {
             restrict: 'EA', //E = element, A = attribute, C = class, M = comment
+            require: '?ngModel',
             scope: {
                 //@ reads the attribute value, = provides two-way binding, & works with functions
                 drClass: '@',
                 drName: '@',
                 drLabel: '@',
+                drChange: '&',
                 bindModel: '=ngModel'
             },
             templateUrl: templatesUrl + 'directives/language-list.directive.html',
             controller: languageListDirectiveController,
             controllerAs: 'dr',
-            link: function (scope, element, attrs, ctrls) {
+            link: function (scope, element, attrs, model) {
 
             } //DOM manipulation
         };
     }
 
-    languageListDirectiveController.$inject = ['LanguageService'];
-    function languageListDirectiveController(LanguageService)
+    languageListDirectiveController.$inject = ['$scope', 'LanguageService'];
+    function languageListDirectiveController($scope, LanguageService)
     {
         var dr = this;
 

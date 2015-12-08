@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends AbstractModel
 {
-    private static $acceptableEdit = [
+    public static $acceptableEdit = [
         'global_title',
         'global_slug'
     ];
 
-    private static $acceptableEditContent = [
+    public static $acceptableEditContent = [
+        'page_id',
+        'language_id',
         'title',
         'slug',
         'language_id',
@@ -38,7 +40,7 @@ class Page extends AbstractModel
 
     public static function getPageById($id, $languageId = 0)
     {
-        return static::join('page_contents', 'pages.id', '=', 'page_contents.page_id')
+        return Models\PageContent::join('pages', 'pages.id', '=', 'page_contents.page_id')
             ->join('languages', 'languages.id', '=', 'page_contents.language_id')
             ->where('pages.id', '=', $id)
             ->where('page_contents.language_id', '=', $languageId)
@@ -46,28 +48,27 @@ class Page extends AbstractModel
             ->first();
     }
 
-    public static function getPageContentByPageId($id, $languageId = 0)
-    {
-        return Models\PageContent::getBy([
-            'page_id' => $id,
-            'language_id' => $languageId
-        ]);
-    }
-
-    public static function updatePage($id, $languageId, $data, $updatePostContent = true)
+    public static function updatePage($id, $data)
     {
         $result = [
             'error' => false,
             'error_update_content' => false,
             'response_code' => 200
         ];
+
         /*Update page*/
-        $page = static::getById($id);
+        $page = static::find($id);
         foreach($data as $key => $row)
         {
             if(in_array($key, static::$acceptableEdit))
             {
                 $page->$key = $row;
+
+                /*Special fields*/
+                if($key == 'global_slug')
+                {
+                    $page->$key = str_slug($row);
+                }
             }
         }
         if(!$page->save())
@@ -75,28 +76,50 @@ class Page extends AbstractModel
             $result['error'] = true;
             $result['response_code'] = 500;
         }
-        else
+
+        return $result;
+    }
+
+    public static function updatePageContent($id, $languageId, $data)
+    {
+        $result = [
+            'error' => false,
+            'error_update_content' => false,
+            'response_code' => 200
+        ];
+
+        /*Update page content*/
+        $pageContent = Models\PageContent::where('page_id', '=', $id)
+            ->where('language_id', '=', $languageId)->first();
+
+        $dataUpdateContent = [];
+        $pageContent->language_id = $data['language_id'];
+        $pageContent->title = $data['title'];
+        $pageContent->slug = $data['slug'];
+
+        dd($pageContent->save());
+//            foreach($data as $keyContent => $rowContent)
+//            {
+//                if(in_array($keyContent, static::$acceptableEditContent))
+//                {
+//                    //$dataUpdateContent[$keyContent] = $rowContent;
+//                    $pageContent->$keyContent = $rowContent;
+//
+//                    /*Special fields*/
+//                    if($keyContent == 'slug')
+//                    {
+//                        //$dataUpdateContent[$keyContent] = str_slug($rowContent);
+//                        $pageContent->$keyContent = str_slug($rowContent);
+//                    }
+//                }
+//            }
+        //if(!$pageContent->update($dataUpdateContent))
+        if(!$pageContent->save())
         {
-            /*Update page content*/
-            if($updatePostContent)
-            {
-                $pageContent = static::getPageContentByPageId($id, $languageId);
-                if(!$pageContent) return $result;
-                $dataUpdateContent = [];
-                foreach($data as $keyContent => $rowContent)
-                {
-                    if(in_array($keyContent, static::$acceptableEditContent))
-                    {
-                        $dataUpdateContent[$keyContent] = $rowContent;
-                    }
-                }
-                if(!$pageContent->update($dataUpdateContent))
-                {
-                    $result['error_update_content'] = true;
-                    $result['response_code'] = 500;
-                }
-            }
+            $result['error_update_content'] = true;
+            $result['response_code'] = 500;
         }
+
         return $result;
     }
 }

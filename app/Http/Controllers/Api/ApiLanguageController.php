@@ -18,7 +18,7 @@ class ApiLanguageController extends BaseController
         ];
     }
 
-    public function index(Request $request)
+    public function getIndex(Request $request)
     {
         $language = Models\Language::getAll();
         $this->data = [

@@ -11,7 +11,7 @@
 |
 */
 
-$app->get('/admin/', function () use ($app) {
+$router->get('/admin', function () {
     return view('admin.master');
 });
 
@@ -20,23 +20,15 @@ $app->get('/admin/', function () use ($app) {
 | START Routes for API actions
 |--------------------------------------------------------------------------
 */
-$app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], function($app) {
+$router->group(['namespace' => 'Api', 'prefix' => 'api'], function($router) {
     /*User*/
-    $app->group(['prefix' => 'api/users', 'namespace' => 'App\Http\Controllers\Api'], function($app){
-        $app->post('/authenticate', 'ApiUserController@postAuthenticate');
-    });
+    $router->controller('users', 'ApiUserController');
 
     /*Page*/
-    $app->group(['prefix' => 'api/pages', 'namespace' => 'App\Http\Controllers\Api'], function($app){
-        $app->get('/', 'ApiPageController@index');
-        $app->get('/{id}/{lang}', 'ApiPageController@show');
-        $app->post('/{id}/{lang}', 'ApiPageController@edit');
-    });
+    $router->controller('pages', 'ApiPageController');
 
     /*Other*/
-    $app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], function($app){
-        $app->get('/languages', 'ApiLanguageController@index');
-    });
+    $router->controller('languages', 'ApiLanguageController');
 });
 /*
 |--------------------------------------------------------------------------

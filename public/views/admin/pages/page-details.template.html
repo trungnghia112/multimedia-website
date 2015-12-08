@@ -1,4 +1,4 @@
-<form accept-charset="utf-8" novalidate ng-submit="vm.updatePage()">
+<form accept-charset="utf-8" novalidate ng-submit="vm.updatePageContent()">
     <div class="portlet light bg-inverse bordered">
         <div class="portlet-title">
             <div class="caption font-red-sunglo">
@@ -21,6 +21,7 @@
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input type="text"
                                class="form-control"
+                               autocomplete="off"
                                ng-class="{edited: vm.currentObj.title}"
                                name="title"
                                ng-model="vm.currentObj.title">
@@ -30,6 +31,7 @@
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input type="text"
                                class="form-control"
+                               autocomplete="off"
                                ng-class="{edited: vm.currentObj.slug}"
                                ng-model="vm.currentObj.slug">
                         <label>Page alias</label>
@@ -38,6 +40,7 @@
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <textarea class="form-control"
                                   rows="3"
+                                  autocomplete="off"
                                   ng-class="{edited: vm.currentObj.description}"
                                   ng-model="vm.currentObj.description"></textarea>
                         <label>Description</label>
@@ -51,8 +54,10 @@
                     <div class="form-group form-md-line-input form-md-floating-label has-info">
                         <language-list dr-class="form-control edited"
                                        dr-name="language_id"
+                                       id="language_id"
                                        dr-label="Language"
-                                       ng-model="vm.currentObj.language_id">
+                                       dr-change="vm.changeLanguage()"
+                                       ng-model="vm.langId">
                         </language-list>
                     </div>
                     <div class="form-group form-md-radios">
@@ -63,9 +68,8 @@
                                        id="publish_page"
                                        name="status"
                                        ng-model="vm.currentObj.status"
-                                       value="1"
-                                       class="md-radiobtn"
-                                       checked>
+                                       ng-value="1"
+                                       class="md-radiobtn">
                                 <label for="publish_page">
                                     <span></span>
                                     <span class="check"></span>
@@ -78,7 +82,7 @@
                                        name="status"
                                        ng-model="vm.currentObj.status"
                                        class="md-radiobtn"
-                                       value="0">
+                                       ng-value="0">
                                 <label for="disabled_page">
                                     <span></span>
                                     <span class="check"></span>
@@ -90,7 +94,7 @@
                                        id="draft_page"
                                        name="status"
                                        ng-model="vm.currentObj.status"
-                                       value="2"
+                                       ng-value="2"
                                        class="md-radiobtn">
                                 <label for="draft_page">
                                     <span></span>

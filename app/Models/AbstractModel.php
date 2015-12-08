@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
-    public static $defaultPerPage = 15;
     public function __construct()
     {
         parent::__construct();
-        $this->defaultPerPage = 15;
     }
     /**
      * Find or create (by specified field)
@@ -29,23 +27,23 @@ abstract class AbstractModel extends Model
         {
             return static::get();
         }
-        return static::paginate(static::$defaultPerPage);
+        return static::paginate(10);
     }
 
     public static function getById($id)
     {
-        $user = static::where('id', '=', $id)->first();
-        return $user;
+        $obj = static::where('id', '=', $id)->first();
+        return $obj;
     }
 
     public static function getBy($fields, $multiple = false, $paginate = false)
     {
-        $user = static::where($fields);
+        $obj = static::where($fields);
         if($multiple)
         {
-            if($paginate) return $user->paginate(static::$defaultPerPage);
-            return $user->get();
+            if($paginate) return $obj->paginate(10);
+            return $obj->get();
         }
-        return $user->first();
+        return $obj->first();
     }
 }

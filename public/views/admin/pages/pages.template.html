@@ -19,7 +19,7 @@
         <tr ng-repeat="item in vm.pages">
             <td><label><input type="checkbox" value="{{ item.id }}"></label></td>
             <td>
-                <a ui-sref="pagesDetails({id: item.id, lang: 59})"
+                <a ui-sref="pageDetails({id: item.id, lang: 59})"
                    title="Edit"
                    ng-bind="item.global_title">
                 </a>
