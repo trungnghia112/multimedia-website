@@ -97,6 +97,7 @@
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{ url('assets/admin/dist/core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <script src="{{ url('assets/admin/dist/angular-core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/core/third_party/ckeditor/ckeditor.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 
 <!-- BEGIN THEME GLOBAL SCRIPTS -->

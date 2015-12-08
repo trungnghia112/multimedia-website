@@ -23,7 +23,8 @@
                     baseUrl: baseUrl,
                     assetsUrl: assetsUrl,
                     templatesUrl: templatesUrl,
-                    viewsUrl: viewsUrl
+                    viewsUrl: viewsUrl,
+                    baseApi: baseApi
                 }
             };
             $rootScope.settings = settings;

@@ -14,7 +14,7 @@ class ApiPageController extends BaseController
         parent::__construct();
         $this->data = [
             'error' => true,
-            'error_code' => 500
+            'response_code' => 500
         ];
     }
 
@@ -23,23 +23,30 @@ class ApiPageController extends BaseController
         $pages = Models\Page::getAll($request->get('page', 1));
         $this->data = [
             'error' => false,
-            'error_code' => 200,
+            'response_code' => 200,
             'data' => $pages->toArray()
         ];
-        return response()->json($this->data, $this->data['error_code']);
+        return response()->json($this->data, $this->data['response_code']);
     }
 
-    public function show(Request $request, $id)
+    public function show(Request $request, $id, $language)
     {
-        $page = Models\Page::getById($id);
+        $page = Models\Page::getPageById($id, $language);
         if($page)
         {
             $this->data = [
                 'error' => false,
-                'error_code' => 200,
+                'response_code' => 200,
                 'data' => $page->toArray()
             ];
         }
-        return response()->json($this->data, $this->data['error_code']);
+        return response()->json($this->data, $this->data['response_code']);
+    }
+
+    public function edit(Request $request, $id, $language)
+    {
+        $data = $request->all();
+        $result = Models\Page::updatePage($id, $language, $data);
+        return response()->json($result, $result['response_code']);
     }
 }

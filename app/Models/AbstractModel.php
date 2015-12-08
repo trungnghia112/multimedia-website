@@ -1,13 +1,17 @@
 <?php
 namespace App\Models;
 
+use App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 abstract class AbstractModel extends Model
 {
+    public static $defaultPerPage = 15;
     public function __construct()
     {
         parent::__construct();
+        $this->defaultPerPage = 15;
     }
     /**
      * Find or create (by specified field)
@@ -25,7 +29,7 @@ abstract class AbstractModel extends Model
         {
             return static::get();
         }
-        return static::paginate(15);
+        return static::paginate(static::$defaultPerPage);
     }
 
     public static function getById($id)
@@ -34,9 +38,14 @@ abstract class AbstractModel extends Model
         return $user;
     }
 
-    public static function getBy($fields)
+    public static function getBy($fields, $multiple = false, $paginate = false)
     {
-        $user = static::where($fields)->first();
-        return $user;
+        $user = static::where($fields);
+        if($multiple)
+        {
+            if($paginate) return $user->paginate(static::$defaultPerPage);
+            return $user->get();
+        }
+        return $user->first();
     }
 }

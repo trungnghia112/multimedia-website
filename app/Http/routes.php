@@ -29,7 +29,13 @@ $app->group(['namespace' => 'App\Http\Controllers\Api', 'prefix' => 'api'], func
     /*Page*/
     $app->group(['prefix' => 'api/pages', 'namespace' => 'App\Http\Controllers\Api'], function($app){
         $app->get('/', 'ApiPageController@index');
-        $app->get('/{id}', 'ApiPageController@show');
+        $app->get('/{id}/{lang}', 'ApiPageController@show');
+        $app->post('/{id}/{lang}', 'ApiPageController@edit');
+    });
+
+    /*Other*/
+    $app->group(['prefix' => 'api', 'namespace' => 'App\Http\Controllers\Api'], function($app){
+        $app->get('/languages', 'ApiLanguageController@index');
     });
 });
 /*

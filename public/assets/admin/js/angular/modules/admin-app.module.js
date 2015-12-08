@@ -31,8 +31,7 @@
                 controllerAs: "vm"
             })
             .state('pagesDetails', {
-                //parent: 'pages',
-                url: "/pages/{id:[0-9]*}",
+                url: "/pages/{id:[0-9]*}/{lang:[0-9]*}",
                 templateUrl: viewsUrl + "pages/page-details.template.html",
                 controller: "PageDetailsController",
                 controllerAs: "vm"

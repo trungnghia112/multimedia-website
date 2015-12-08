@@ -14,18 +14,6 @@
                 //elem.addClass('hidden'); // hide spinner bar by default
 
                 // display the spinner bar whenever the route changes(the content part started loading)
-                $rootScope.$on('$locationChangeStart', function() {
-                    //elem.removeClass('hidden'); // show spinner bar
-                    $rootScope.settings.layout.loading = true;
-                });
-
-                // hide the spinner bar on rounte change success(after the content loaded)
-                $rootScope.$on('$routeChangeSuccess', function() {
-                    //elem.addClass('hidden'); // hide spinner bar
-                    $rootScope.settings.layout.loading = false;
-                });
-
-                // display the spinner bar whenever the route changes(the content part started loading)
                 $rootScope.$on('$stateChangeStart', function() {
                     $rootScope.settings.layout.loading = true; // show spinner bar
                 });
