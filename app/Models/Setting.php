@@ -24,7 +24,7 @@ class Setting extends AbstractModel
 
     protected $primaryKey = 'id';
 
-    public static function getAll($page = null)
+    public static function getAllSettings()
     {
         $result = [];
         $settings = static::get();

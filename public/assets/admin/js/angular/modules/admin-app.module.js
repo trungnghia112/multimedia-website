@@ -2,7 +2,15 @@
     'use strict';
     angular.module('app', []);
     angular
-        .module('adminApp', ['ui.router', 'ngCookies', 'ngResource', 'app', 'ngMessages', 'ui.bootstrap', 'ngSanitize'])
+        .module('adminApp', [
+            'ui.router',
+            'ngCookies',
+            'ngResource',
+            'app',
+            'ngMessages',
+            'ui.bootstrap',
+            'ngSanitize'
+        ])
         .config(config)
         .run(run);
 

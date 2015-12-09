@@ -35,7 +35,7 @@
                                ng-class="{edited: vm.currentObj.slug}"
                                ng-model="vm.currentObj.slug">
                         <label>Page alias</label>
-                        <span class="help-block">{{ settings.url.baseUrl + '#/' + vm.currentObj.slug }}</span>
+                        <span class="help-block">{{ settings.url.baseUrl + '#/' }}{{ vm.currentObj.slug || vm.currentObj.global_slug }}</span>
                     </div>
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <textarea class="form-control"

@@ -29,6 +29,7 @@ $router->group(['namespace' => 'Api', 'prefix' => 'api'], function($router) {
 
     /*Other*/
     $router->controller('languages', 'ApiLanguageController');
+    $router->controller('file', 'ApiFileController');
 });
 /*
 |--------------------------------------------------------------------------

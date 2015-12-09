@@ -20,7 +20,7 @@ class Language extends AbstractModel
 
     protected $primaryKey = 'id';
 
-    public static function getAll($status = 1)
+    public static function getAllLanguage($status = 1)
     {
         return static::where('status', '=', $status)->get();
     }

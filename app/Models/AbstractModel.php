@@ -21,13 +21,13 @@ abstract class AbstractModel extends Model
         return $obj ?: new static;
     }
 
-    public static function getAll($page = null)
+    public static function getAll($page = null, $perPage = 10)
     {
         if(!$page || $page < 1)
         {
             return static::get();
         }
-        return static::paginate(10);
+        return static::paginate($perPage);
     }
 
     public static function getById($id)
@@ -36,12 +36,12 @@ abstract class AbstractModel extends Model
         return $obj;
     }
 
-    public static function getBy($fields, $multiple = false, $paginate = false)
+    public static function getBy($fields, $multiple = false, $paginate = false, $perPage = 10)
     {
         $obj = static::where($fields);
         if($multiple)
         {
-            if($paginate) return $obj->paginate(10);
+            if($paginate) return $obj->paginate($perPage);
             return $obj->get();
         }
         return $obj->first();

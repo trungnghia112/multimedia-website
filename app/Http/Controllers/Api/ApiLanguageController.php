@@ -20,7 +20,7 @@ class ApiLanguageController extends BaseController
 
     public function getIndex(Request $request)
     {
-        $language = Models\Language::getAll();
+        $language = Models\Language::getAllLanguage();
         $this->data = [
             'error' => false,
             'response_code' => 200,
