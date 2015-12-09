@@ -1,0 +1,9 @@
+<label ng-bind-html="drLabel" class="label-top"></label>
+<select
+        name="{{ drName }}"
+        class="{{ drClass }}"
+        ng-options="item.id as item.language_name for item in dr.languages"
+        ng-change="drChange()"
+        ng-model="bindModel">
+</select>
+<label ng-bind-html="drLabel" class="label-bottom"></label>

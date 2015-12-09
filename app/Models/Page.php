@@ -69,6 +69,11 @@ class Page extends AbstractModel
             if(in_array($keyContent, static::$acceptableEditContent))
             {
                 $pageContent->$keyContent = $rowContent;
+
+                if($keyContent == 'slug')
+                {
+                    $pageContent->$keyContent = str_slug($rowContent);
+                }
             }
         }
         if($pageContent->save())

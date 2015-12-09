@@ -1,0 +1,14 @@
+body {
+  &.on-loading {
+    background-color: #fff;
+    > * {
+      display: none;
+    }
+    .page-spinner-bar {
+      display: block;
+    }
+  }
+  .page-spinner-bar {
+    display: none;
+  }
+}

@@ -1,0 +1,130 @@
+<form accept-charset="utf-8" novalidate ng-submit="vm.updatePageContent()">
+    <div class="portlet light bg-inverse bordered">
+        <div class="portlet-title">
+            <div class="caption font-red-sunglo">
+                <i class="icon-share font-red-sunglo"></i>
+                <span class="caption-subject bold uppercase">{{ vm.currentObj.global_title }}</span>
+                <!--<span class="caption-helper">edit</span>-->
+            </div>
+            <div class="actions">
+                <div class="btn-group btn-group-devided">
+                    <button type="submit" class="btn btn-circle green font-white btn-default btn-sm">
+                        <i class="fa fa-check"></i> Update
+                    </button>
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-body">
+            <div class="row">
+                <div class="col-lg-9 col-md-8">
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text"
+                               class="form-control"
+                               autocomplete="off"
+                               ng-class="{edited: vm.currentObj.title}"
+                               name="title"
+                               ng-model="vm.currentObj.title">
+                        <label>Page title</label>
+                        <span class="help-block">Title of page</span>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <input type="text"
+                               class="form-control"
+                               autocomplete="off"
+                               ng-class="{edited: vm.currentObj.slug}"
+                               ng-model="vm.currentObj.slug">
+                        <label>Page alias</label>
+                        <span class="help-block">{{ settings.url.baseUrl + '#/' + vm.currentObj.slug }}</span>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <textarea class="form-control"
+                                  rows="3"
+                                  autocomplete="off"
+                                  ng-class="{edited: vm.currentObj.description}"
+                                  ng-model="vm.currentObj.description"></textarea>
+                        <label>Description</label>
+                        <span class="help-block">Page description</span>
+                    </div>
+                    <div class="form-group form-md-line-input form-md-floating-label">
+                        <textarea ckeditor ng-model="vm.currentObj.content"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4">
+                    <div class="form-group form-md-line-input form-md-floating-label has-info">
+                        <language-list dr-class="form-control edited"
+                                       dr-name="language_id"
+                                       id="language_id"
+                                       dr-label="Language"
+                                       dr-change="vm.changeLanguage()"
+                                       ng-model="vm.langId">
+                        </language-list>
+                    </div>
+                    <div class="form-group form-md-radios">
+                        <label>Status</label>
+                        <div class="md-radio-list">
+                            <div class="md-radio has-success">
+                                <input type="radio"
+                                       id="publish_page"
+                                       name="status"
+                                       ng-model="vm.currentObj.status"
+                                       ng-value="1"
+                                       class="md-radiobtn">
+                                <label for="publish_page">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> Publish this page
+                                </label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio"
+                                       id="disabled_page"
+                                       name="status"
+                                       ng-model="vm.currentObj.status"
+                                       class="md-radiobtn"
+                                       ng-value="0">
+                                <label for="disabled_page">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> Disabled
+                                </label>
+                            </div>
+                            <div class="md-radio has-warning">
+                                <input type="radio"
+                                       id="draft_page"
+                                       name="status"
+                                       ng-model="vm.currentObj.status"
+                                       ng-value="2"
+                                       class="md-radiobtn">
+                                <label for="draft_page">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> Draft
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="thumbnail">
+                            <img ng-src="/uploads/{{ vm.currentObj.thumbnail }}"
+                                 alt="{{ vm.currentObj.global_title }}"
+                                 class="img-reponsive">
+                            <div class="caption text-right">
+                                <button type="button" class="btn btn-circle btn-info btn-sm">Update thumbnail</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="portlet-title portlet-footer">
+            <div class="actions">
+                <div class="btn-group btn-group-devided">
+                    <button type="submit" class="btn btn-circle green font-white btn-default btn-lg">
+                        <i class="fa fa-check"></i> Update
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
