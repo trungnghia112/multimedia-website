@@ -20,7 +20,7 @@ class PageContent extends AbstractModel {
      *
      * @var string
      */
-    protected $primaryKey = null;
+    protected $primaryKey = 'id';
 
     /**
      * Set the relationship

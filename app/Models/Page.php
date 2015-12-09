@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends AbstractModel
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'pages';
+
+    protected $primaryKey = 'id';
+
     private static $acceptableEdit = [
         'global_title',
         'global_slug'
@@ -22,19 +35,6 @@ class Page extends AbstractModel
         'status',
         'tags'
     ];
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
-    protected $table = 'pages';
-
-    protected $primaryKey = 'id';
 
     public static function getPageById($id, $languageId = 0)
     {
@@ -54,48 +54,27 @@ class Page extends AbstractModel
         ]);
     }
 
-    public static function updatePage($id, $languageId, $data, $updatePostContent = true)
+    public static function updatePageContent($id, $languageId, $data)
     {
         $result = [
-            'error' => false,
-            'error_update_content' => false,
-            'response_code' => 200
+            'error' => true,
+            'response_code' => 500
         ];
-        /*Update page*/
-        $page = static::getById($id);
-        foreach($data as $key => $row)
+
+        /*Update page content*/
+        $pageContent = static::getPageContentByPageId($id, $languageId);
+        if(!$pageContent) return $result;
+        foreach($data as $keyContent => $rowContent)
         {
-            if(in_array($key, static::$acceptableEdit))
+            if(in_array($keyContent, static::$acceptableEditContent))
             {
-                $page->$key = $row;
+                $pageContent->$keyContent = $rowContent;
             }
         }
-        if(!$page->save())
+        if($pageContent->save())
         {
-            $result['error'] = true;
-            $result['response_code'] = 500;
-        }
-        else
-        {
-            /*Update page content*/
-            if($updatePostContent)
-            {
-                $pageContent = static::getPageContentByPageId($id, $languageId);
-                if(!$pageContent) return $result;
-                $dataUpdateContent = [];
-                foreach($data as $keyContent => $rowContent)
-                {
-                    if(in_array($keyContent, static::$acceptableEditContent))
-                    {
-                        $dataUpdateContent[$keyContent] = $rowContent;
-                    }
-                }
-                if(!$pageContent->update($dataUpdateContent))
-                {
-                    $result['error_update_content'] = true;
-                    $result['response_code'] = 500;
-                }
-            }
+            $result['error'] = false;
+            $result['response_code'] = 200;
         }
         return $result;
     }
