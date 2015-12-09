@@ -6,3 +6,5 @@
 /bower_components
 /.idea
 /node_modules
+composer.phar
+/composer.phar
