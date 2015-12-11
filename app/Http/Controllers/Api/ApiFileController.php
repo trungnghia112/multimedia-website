@@ -15,7 +15,7 @@ class ApiFileController extends BaseController
 
     }
 
-    public function getIndex(Request $request)
+    public function anyIndex(Request $request)
     {
         $path = './uploads';
         $dir = $path;

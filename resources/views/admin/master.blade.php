@@ -21,15 +21,23 @@
     <link href="{{ url('theme/admin/assets/global/plugins/uniform/css/uniform.default.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css"/>
     <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" />
+    <!-- END PAGE LEVEL PLUGINS -->
+
     <!-- BEGIN THEME GLOBAL STYLES -->
     <link href="{{ url('theme/admin/assets/global/css/components-md.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" id="style_components" type="text/css"/>
     <link href="{{ url('theme/admin/assets/global/css/plugins-md.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css"/>
     <!-- END THEME GLOBAL STYLES -->
+
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="{{ url('theme/admin/assets/layouts/layout/css/layout.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css"/>
     <link href="{{ url('theme/admin/assets/layouts/layout/css/themes/darkblue.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" id="style_color"/>
     <link href="{{ url('assets/admin/css/style.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css"/>
     <!-- END THEME LAYOUT STYLES -->
+
     <link rel="shortcut icon" href="{{ url('favicon.ico', [], env('APP_HTTPS', false)) }}"/>
 
     <script type="text/javascript">

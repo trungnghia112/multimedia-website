@@ -1,0 +1,81 @@
+.files-list {
+  .item {
+    @media (min-width: 1200px) {
+      &:nth-child(6n+1) {
+        clear: both;
+      }
+    }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      &:nth-child(4n+1) {
+        clear: both;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 991px) {
+      &:nth-child(3n+1) {
+        clear: both;
+      }
+    }
+    @media (max-width: 767px) {
+      &:nth-child(2n+1) {
+        clear: both;
+      }
+    }
+  }
+  .thumbnail {
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      border: 1px solid #e7505a;
+    }
+    &:before {
+      content: "\f00c";
+      display: none;
+      font: normal normal normal 18px/1 FontAwesome;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      width: 30px;
+      height: 30px;
+      background-color: #1bbc9b;
+      outline: 1px solid #1bbc9b;
+      border: 1px solid #fff;
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: #fff;
+      z-index: 5;
+      line-height: 26px;
+      font-size: 15px;
+    }
+    &.active {
+      border: 1px solid #1bbc9b;
+      background-color: #efefef;
+      &:before {
+        display: block;
+      }
+    }
+  }
+  .image {
+    position: relative;
+    padding-bottom: 100%;
+    display: block;
+    width: 100%;
+    border: 1px solid #ddd;
+    img {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      max-width: 90%;
+      max-height:90%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: auto;
+    }
+  }
+  .caption {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -105,14 +105,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="thumbnail">
-                            <img ng-src="/uploads/{{ vm.currentObj.thumbnail }}"
-                                 alt="{{ vm.currentObj.global_title }}"
-                                 class="img-reponsive">
-                            <div class="caption text-right">
-                                <button type="button" class="btn btn-circle btn-info btn-sm">Update thumbnail</button>
-                            </div>
-                        </div>
+                       <media-box dr-title="{{ vm.currentObj.global_title }}"
+                                  dr-button-title="Update thumbnail"
+                                  ng-model="vm.currentObj.thumbnail">
+                       </media-box>
                     </div>
                 </div>
             </div>

@@ -46,7 +46,7 @@ gulp.task("sassAdmin", function(){
 /*Min script*/
 gulp.task('coreMinJsAdmin', function() {
     gulp.src([
-            path.bower + 'jquery/dist/jquery.min.js',
+            path.themeAdminPlugins + 'jquery.min.js',
             path.bower + 'jquery-placeholder/jquery.placeholder.min.js',
             path.bower + 'modernizr/modernizr.js',
             path.bower + 'bootstrap-sass/assets/javascripts/bootstrap.min.js',
@@ -55,7 +55,9 @@ gulp.task('coreMinJsAdmin', function() {
             path.themeAdminPlugins + 'jquery-slimscroll/jquery.slimscroll.min.js',
             path.themeAdminPlugins + 'jquery.blockui.min.js',
             path.themeAdminPlugins + 'uniform/jquery.uniform.min.js',
-            path.themeAdminPlugins + 'bootstrap-switch/js/bootstrap-switch.min.js'
+            path.themeAdminPlugins + 'bootstrap-switch/js/bootstrap-switch.min.js',
+            path.themeAdminPlugins + 'bootstrap-modal/js/bootstrap-modalmanager.js',
+            path.themeAdminPlugins + 'bootstrap-modal/js/bootstrap-modal.js'
         ])
         .pipe(concat('core.min.js'))
         .pipe(uglify())
