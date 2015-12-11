@@ -8,3 +8,4 @@
 /node_modules
 composer.phar
 /composer.phar
+/public/uploads
