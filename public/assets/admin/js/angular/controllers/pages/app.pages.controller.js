@@ -32,6 +32,7 @@
             PageService.getAll(function(response){
                 /*Successful*/
                 vm.pages = response.data.data.data;
+                App.initComponents();
             }, function(response){
 
             });

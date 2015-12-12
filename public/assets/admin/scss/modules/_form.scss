@@ -3,3 +3,24 @@
     display: none;
   }
 }
+
+.custom-checkbox {
+  position: relative;
+  .checker {
+    &:hover,
+    &:focus {
+      span {
+        background-position: -38px -260px;
+      }
+    }
+  }
+  input[type="checkbox"] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    &:checked + span {
+      background-position: -76px -260px;
+    }
+  }
+}
