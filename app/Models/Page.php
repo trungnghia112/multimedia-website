@@ -23,7 +23,8 @@ class Page extends AbstractModel
 
     private static $acceptableEdit = [
         'global_title',
-        'global_slug'
+        'global_slug',
+        'status'
     ];
 
     private static $acceptableEditContent = [
@@ -55,6 +56,36 @@ class Page extends AbstractModel
         ]);
     }
 
+    public static function updatePage($id, $data)
+    {
+        $result = [
+            'error' => true,
+            'response_code' => 500
+        ];
+        $page = static::find($id);
+        if(!$page) return $result;
+
+        foreach($data as $key => $row)
+        {
+            if(in_array($key, static::$acceptableEditContent))
+            {
+                $page->$key = $row;
+
+                if($key == 'global_slug')
+                {
+                    $page->$key = str_slug($row);
+                }
+            }
+        }
+
+        if($page->save())
+        {
+            $result['error'] = false;
+            $result['response_code'] = 200;
+        }
+        return $result;
+    }
+
     public static function updatePageContent($id, $languageId, $data)
     {
         $result = [
@@ -78,6 +109,29 @@ class Page extends AbstractModel
             }
         }
         if($pageContent->save())
+        {
+            $result['error'] = false;
+            $result['response_code'] = 200;
+        }
+        return $result;
+    }
+
+    public static function deletePage($id)
+    {
+        $result = [
+            'error' => true,
+            'response_code' => 500
+        ];
+        $page = static::find($id);
+        if(!$page) return $result;
+
+        $related = PageContent::where('page_id', '=', $id);
+        if(!$related->get())
+        {
+            $related = null;
+        }
+
+        if($page->delete() && $related && $related->delete())
         {
             $result['error'] = false;
             $result['response_code'] = 200;

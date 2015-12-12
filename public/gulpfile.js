@@ -83,7 +83,8 @@ gulp.task('angularCoreMinJsAdmin', function() {
             path.bower + 'angular-messages/angular-messages.min.js',
             path.bower + 'angular-sanitize/angular-sanitize.min.js',
             path.bower + 'angular-touch/angular-touch.min.js',
-            path.bower + 'angular-bootstrap/ui-bootstrap-tpls.js'
+            path.bower + 'angular-bootstrap/ui-bootstrap-tpls.js',
+            path.bower + 'angular-bootstrap-confirm/dist/angular-bootstrap-confirm.min.js'
         ])
         .pipe(concat('angular-core.min.js'))
         .pipe(uglify())

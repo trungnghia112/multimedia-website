@@ -9,7 +9,8 @@
             'app',
             'ngMessages',
             'ui.bootstrap',
-            'ngSanitize'
+            'ngSanitize',
+            'mwl.confirm'
         ])
         .config(config)
         .run(run);

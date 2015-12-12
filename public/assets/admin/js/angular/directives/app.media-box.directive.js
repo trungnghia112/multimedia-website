@@ -14,7 +14,6 @@
                 drTitle: '@',
                 drButtonTitle: '@',
                 drType: '@',
-                drUniqueName: '@',
                 drModel: '=ngModel'
             },
             templateUrl: templatesUrl + 'directives/media-box.directive.html',

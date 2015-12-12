@@ -36,9 +36,46 @@
             </td>
             <td ng-bind-html="vm.getStatus(item.status)"></td>
             <td>
-                <button type="button" class="btn btn-danger btn-xs" title="Remove this page"><i class="fa fa-times"></i>
+                <button type="button"
+                        class="btn btn-success btn-xs"
+                        title="Active this page"
+                        mwl-confirm
+                        message="Are you sure you wanna active this page?"
+                        confirm-text="Yes <i class='fa fa-check'></i>"
+                        cancel-text="No <i class='fa fa-times'></i>"
+                        placement="top"
+                        confirm-button-type="danger"
+                        cancel-button-type="success"
+                        on-confirm="vm.updateStatus(item.id, 1)"
+                        ng-if="item.status == 0">
+                    <i class="fa fa-check"></i>
                 </button>
-                <button type="button" class="btn btn-success btn-xs" title="Active this page"><i class="fa fa-check"></i>
+                <button type="button"
+                        class="btn btn-warning btn-xs"
+                        title="Disable this page"
+                        mwl-confirm
+                        message="Are you sure you wanna disable this page?"
+                        confirm-text="Yes <i class='fa fa-check'></i>"
+                        cancel-text="No <i class='fa fa-times'></i>"
+                        placement="top"
+                        confirm-button-type="danger"
+                        cancel-button-type="success"
+                        on-confirm="vm.updateStatus(item.id, 0)"
+                        ng-if="item.status == 1">
+                    <i class="fa fa-times"></i>
+                </button>
+                <button type="button"
+                        class="btn btn-danger btn-xs"
+                        title="Remove this page"
+                        mwl-confirm
+                        message="Are you sure you wanna delete this page?"
+                        confirm-text="Yes <i class='fa fa-check'></i>"
+                        cancel-text="No <i class='fa fa-times'></i>"
+                        placement="top"
+                        confirm-button-type="danger"
+                        cancel-button-type="success"
+                        on-confirm="vm.deletePage(item.id)">
+                    <i class="fa fa-trash"></i>
                 </button>
             </td>
         </tr>

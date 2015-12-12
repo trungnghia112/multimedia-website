@@ -51,10 +51,23 @@ class ApiPageController extends BaseController
         return response()->json($this->data, $this->data['response_code']);
     }
 
+    public function postEditGlobal(Request $request, $id)
+    {
+        $data = $request->all();
+        $result = Models\Page::updatePage($id, $data);
+        return response()->json($result, $result['response_code']);
+    }
+
     public function postEdit(Request $request, $id, $language)
     {
         $data = $request->all();
         $result = Models\Page::updatePageContent($id, $language, $data);
+        return response()->json($result, $result['response_code']);
+    }
+
+    public function deleteDelete(Request $request, $id)
+    {
+        $result = Models\Page::deletePage($id);
         return response()->json($result, $result['response_code']);
     }
 }

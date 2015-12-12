@@ -10,6 +10,8 @@
         var vm = this;
 
         vm.getStatus = getStatus;
+        vm.updateStatus = updateStatus;
+        vm.deletePage = deletePage;
 
         (function initController() {
             pages();
@@ -29,12 +31,14 @@
 
         function getAllPages()
         {
+            $rootScope.showLoadingState();
             PageService.getAll(function(response){
                 /*Successful*/
                 vm.pages = response.data.data.data;
                 App.initComponents();
+                $rootScope.hideLoadingState();
             }, function(response){
-
+                $rootScope.hideLoadingState();
             });
         }
 
@@ -55,6 +59,29 @@
                     return '<span class="label label-default">disabled</span>';
                 } break;
             }
+        }
+
+        function updateStatus($id, $status)
+        {
+            var $data = {
+                status: $status
+            };
+            $rootScope.showLoadingState();
+            PageService.updateGlobal($id, $data, function(response){
+                getAllPages();
+            }, function(response){
+                $rootScope.hideLoadingState();
+            });
+        }
+
+        function deletePage($id)
+        {
+            $rootScope.showLoadingState();
+            PageService.deletePage($id, function(response){
+                getAllPages();
+            }, function(response){
+                $rootScope.hideLoadingState();
+            });
         }
     }
 })();
