@@ -12,6 +12,15 @@
         vm.getStatus = getStatus;
         vm.updateStatus = updateStatus;
         vm.deletePage = deletePage;
+        vm.paginationChanged = paginationChanged;
+        vm.perPageChanged = perPageChanged;
+
+        /*Pagination*/
+        vm.currentPage = 1;
+        vm.perPage = 10;
+        vm.totalItems = 0;
+        vm.maxSize = 3;
+        vm.lastPage = 1;
 
         (function initController() {
             pages();
@@ -24,22 +33,52 @@
         function pages()
         {
             $rootScope.bodyClass = 'page page-pages';
-            $rootScope.pageTitle = 'Pages';
+            $rootScope.pageTitle = 'All pages';
 
-            getAllPages();
+            getAllPages(vm.currentPage, vm.perPage);
         }
 
-        function getAllPages()
+        function getAllPages($paged, $perPage, callback)
         {
             $rootScope.showLoadingState();
-            PageService.getAll(function(response){
+            PageService.getAll($paged, $perPage, function(response){
                 /*Successful*/
-                vm.pages = response.data.data.data;
+                if($perPage < 1)
+                {
+                    vm.pages = response.data.data;
+
+                    vm.currentPage = 1;
+                    vm.totalItems = vm.pages.length;
+                    vm.lastPage = 1;
+                }
+                else
+                {
+                    vm.pages = response.data.data.data;
+
+                    vm.currentPage = response.data.data.current_page;
+                    vm.perPage = response.data.data.per_page;
+                    vm.totalItems = response.data.data.total;
+                    vm.lastPage = response.data.data.last_page;
+                }
+
                 App.initComponents();
                 $rootScope.hideLoadingState();
+
+                /*Callback*/
+                if(callback) callback();
             }, function(response){
                 $rootScope.hideLoadingState();
             });
+        }
+
+        function paginationChanged()
+        {
+            getAllPages(vm.currentPage, vm.perPage);
+        }
+
+        function perPageChanged()
+        {
+            getAllPages(1, vm.perPage);
         }
 
         function getStatus(status)
@@ -68,7 +107,7 @@
             };
             $rootScope.showLoadingState();
             PageService.updateGlobal($id, $data, function(response){
-                getAllPages();
+                getAllPages(vm.currentPage, vm.perPage);
             }, function(response){
                 $rootScope.hideLoadingState();
             });
@@ -78,7 +117,7 @@
         {
             $rootScope.showLoadingState();
             PageService.deletePage($id, function(response){
-                getAllPages();
+                getAllPages(vm.currentPage, vm.perPage);
             }, function(response){
                 $rootScope.hideLoadingState();
             });

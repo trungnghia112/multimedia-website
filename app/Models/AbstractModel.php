@@ -23,7 +23,7 @@ abstract class AbstractModel extends Model
 
     public static function getAll($page = null, $perPage = 10)
     {
-        if(!$page || $page < 1)
+        if(!$page || $page < 1 || $perPage < 1)
         {
             return static::get();
         }

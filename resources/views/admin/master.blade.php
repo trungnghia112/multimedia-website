@@ -80,7 +80,7 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="" ng-class="{'page-content': !settings.layout.isLogin}">
             <!-- BEGIN ACTUAL CONTENT -->
-            <h3 class="page-title" ng-if="!settings.layout.isLogin" ng-bind="pageTitle"></h3>
+            <!--<h3 class="page-title" ng-if="!settings.layout.isLogin"></h3>-->
             <div ui-view class="fade-in-up"></div>
             <!-- END ACTUAL CONTENT -->
         </div>

@@ -123,19 +123,43 @@ class Page extends AbstractModel
             'response_code' => 500
         ];
         $page = static::find($id);
-        if(!$page) return $result;
 
-        $related = PageContent::where('page_id', '=', $id);
-        if(!$related->get())
+        if(!$page)
+        {
+            $result['message'] = 'The page you have tried to edit not found';
+            return $result;
+        }
+
+        $temp = PageContent::where('page_id', '=', $id);
+        $related = $temp->get();
+        if(!count($related))
         {
             $related = null;
         }
 
-        if($page->delete() && $related && $related->delete())
+        /*Remove all related content*/
+        if($related != null)
         {
-            $result['error'] = false;
-            $result['response_code'] = 200;
+            if($temp->delete())
+            {
+                $result['error'] = false;
+                $result['response_code'] = 200;
+            }
+            if(!$page->delete())
+            {
+                $result['error'] = true;
+                $result['response_code'] = 500;
+            }
         }
+        else
+        {
+            if($page->delete())
+            {
+                $result['error'] = false;
+                $result['response_code'] = 200;
+            }
+        }
+
         return $result;
     }
 }

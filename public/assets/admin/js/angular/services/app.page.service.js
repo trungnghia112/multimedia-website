@@ -17,8 +17,15 @@
 
         return service;
 
-        function getAll(callback, callbackError) {
-            return $http.get(baseApi + 'pages').then(callback, callbackError);
+        function getAll($paged, $perPage, callback, callbackError) {
+            if(!$paged) $paged = 1;
+            if(!$perPage) $perPage = 10;
+            return $http.get(baseApi + 'pages', {
+                params: {
+                    page: $paged,
+                    per_page: $perPage
+                }
+            }).then(callback, callbackError);
         }
 
         function get($id, $lang, callback, callbackError) {

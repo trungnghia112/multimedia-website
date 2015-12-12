@@ -1,0 +1,18 @@
+.table-wrapper {
+  .pagination-wrapper .pagination {
+    margin-top: 0;
+  }
+  .table-change-per-page {
+    margin-left: 10px;
+  }
+  .table {
+    margin-bottom: 15px;
+  }
+}
+.table.vertical-middle {
+  td,
+  tr,
+  th {
+    vertical-align: middle;
+  }
+}
