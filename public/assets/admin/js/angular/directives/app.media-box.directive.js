@@ -27,8 +27,8 @@
         };
     }
 
-    mediaBoxController.$inject = ['$rootScope', '$element', 'FileService'];
-    function mediaBoxController($rootScope, $element, FileService)
+    mediaBoxController.$inject = ['$rootScope', '$scope', '$element', 'FileService'];
+    function mediaBoxController($rootScope, $scope, $element, FileService)
     {
         var dr = this;
 
@@ -70,14 +70,26 @@
             var result = '/theme/admin/images/folder.jpg';
             if(!item.is_dir)
             {
-                var sub = '/';
-                if(dr.sub.length > 0)
+                if(_isImage(item.extension))
                 {
-                    sub += dr.sub.join('/') + '/';
+                    var sub = '/';
+                    if(dr.sub.length > 0)
+                    {
+                        sub += dr.sub.join('/') + '/';
+                    }
+                    result = '/uploads' + sub + item.name;
                 }
-                result = '/uploads' + sub + item.name;
+                else
+                {
+                    result = '/theme/admin/images/file.png';
+                }
             }
             return result;
+        }
+
+        function _isImage(extension)
+        {
+            return (/(gif|jpg|jpeg|tiff|png)$/i).test(extension);
         }
 
         function getItemTitle(item)
