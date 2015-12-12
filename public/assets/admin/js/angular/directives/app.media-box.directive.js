@@ -13,7 +13,9 @@
                 //@ reads the attribute value, = provides two-way binding, & works with functions
                 drTitle: '@',
                 drButtonTitle: '@',
-                bindModel: '=ngModel'
+                drType: '@',
+                drUniqueName: '@',
+                drModel: '=ngModel'
             },
             templateUrl: templatesUrl + 'directives/media-box.directive.html',
             controller: mediaBoxController,
@@ -37,27 +39,35 @@
         dr.getItemTitle = getItemTitle;
         dr.toggleActive = toggleActive;
         dr.upToParentFolder = upToParentFolder;
+        dr.selectMedia = selectMedia;
 
         dr.files = [];
         dr.sub = [];
+        dr.selectedItem = '';
 
         (function initController() {
 
         })();
 
-        function getFiles($folder)
+        var $modal = $element.find('.modal');
+
+        function getFiles($type, $folder)
         {
+            if(!$type)
+            {
+                $type = 'image';
+            }
             if(!$folder)
             {
                 dr.sub = [];
             }
             $rootScope.showLoadingState();
             dr.files = [];
-            FileService.getFiles($folder, function(response){
+            FileService.getFiles($type, $folder, function(response){
                 dr.files = response.data;
                 $rootScope.hideLoadingState();
                 setTimeout(function(){
-                    $element.find('.modal').modal('show');
+                    $modal.modal('show');
                 }, 100);
             },function(response){
                 dr.files = [];
@@ -102,26 +112,44 @@
             return result;
         }
 
-        function toggleActive(item)
+        function toggleActive(item, type)
         {
             if(item.is_dir)
             {
-                dr.sub.push(item.name);
                 var sub = '';
+                dr.sub.push(item.name);
                 if(dr.sub.length > 0)
                 {
                     sub += dr.sub.join('/') + '';
                 }
-                return getFiles(sub);
+                return getFiles(type, sub);
             }
-            if(!item.active)
+
+            var $isActivated = item.active;
+
+            /*Remove activated item*/
+            angular.forEach(dr.files, function(value, key){
+                value.active = false;
+            });
+
+            /*Update selected item url*/
+            var updatedUrl = '/uploads/' + item.name;
+            if(dr.sub.length > 0)
             {
-                return item.active = true;
+                updatedUrl = '/uploads/' + dr.sub.join('/') + '/' + item.name;
             }
-            return item.active = false;
+            dr.selectedItem = updatedUrl;
+
+            if($isActivated)
+            {
+                dr.selectedItem = '';
+                return item.active = false;
+            }
+
+            return item.active = true;
         }
 
-        function upToParentFolder()
+        function upToParentFolder(type)
         {
             dr.sub.splice(-1,1);
             var sub = '';
@@ -129,7 +157,14 @@
             {
                 sub += dr.sub.join('/') + '';
             }
-            return getFiles(sub);
+            return getFiles(type, sub);
+        }
+
+        function selectMedia()
+        {
+            $scope.drModel = dr.selectedItem;
+            //$scope.$apply();
+            $modal.modal('hide');
         }
     }
 })();

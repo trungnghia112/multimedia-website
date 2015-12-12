@@ -1,3 +1,20 @@
+.modal-media-box {
+  //width: 100%;
+  //max-width: 1200px;
+}
+.media-box-tabbable {
+  .tab-content {
+    max-height: 500px;
+    overflow: auto;
+    padding: 20px 0 0;
+  }
+  .content {
+    padding: 0 10px;
+    [class*="col-"] {
+      padding: 0 10px;
+    }
+  }
+}
 .files-list {
   .item {
     @media (min-width: 1200px) {

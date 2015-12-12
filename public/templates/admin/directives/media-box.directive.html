@@ -1,10 +1,10 @@
 <div class="thumbnail">
-    <img ng-src="{{ bindModel }}"
+    <img ng-src="{{ drModel }}"
          alt="{{ drTitle }}"
          class="img-reponsive">
     <div class="caption text-right">
         <button type="button"
-                ng-click="dr.getFiles(null)"
+                ng-click="dr.getFiles(drType, null)"
                 class="btn btn-circle btn-info btn-sm btn-action">
             {{ drButtonTitle || 'Update media'}}
         </button>
@@ -14,32 +14,60 @@
 <div class="modal fade modal-scroll" tabindex="-1" data-width="1200">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-        <h4 class="modal-title">Select media</h4>
+        <h4 class="modal-title">Insert media</h4>
     </div>
     <div class="modal-body">
-        <div class="row files-list">
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 item"
-                 ng-click="dr.upToParentFolder()"
-                 ng-if="dr.sub.length > 0">
-                <div class="thumbnail">
-                    <div class="image">
-                        <img ng-src="/theme/admin/images/folder.jpg" alt="">
-                    </div>
-                    <div class="caption">
-                        <span>{...}</span>
+        <div class="tabbable-custom media-box-tabbable">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a data-target="#{{ drUniqueName }}_1" data-toggle="tab">Uploaded files</a>
+                </li>
+                <li>
+                    <a data-target="#{{ drUniqueName }}_2" data-toggle="tab">External link</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="{{ drUniqueName }}_1">
+                    <div class="files-list content">
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 item"
+                             ng-click="dr.upToParentFolder(drType)"
+                             ng-if="dr.sub.length > 0">
+                            <div class="thumbnail">
+                                <div class="image">
+                                    <img ng-src="/theme/admin/images/folder.jpg" alt="">
+                                </div>
+                                <div class="caption">
+                                    <span>{...}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 item" ng-repeat="item in dr.files | orderBy: '-is_dir' ">
+                            <div class="thumbnail"
+                                 title="{{ dr.getItemTitle(item) }}"
+                                 ng-class="{'active': item.active}"
+                                 ng-click="dr.toggleActive(item, drType)">
+                                <div class="image">
+                                    <img ng-src="{{ dr.getItemThumbnail(item) }}" alt="">
+                                </div>
+                                <div class="caption">
+                                    <span>{{ item.name }}</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6 item" ng-repeat="item in dr.files | orderBy: '-is_dir' ">
-                <div class="thumbnail"
-                     title="{{ dr.getItemTitle(item) }}"
-                     ng-class="{'active': item.active}"
-                     ng-click="dr.toggleActive(item)">
-                    <div class="image">
-                        <img ng-src="{{ dr.getItemThumbnail(item) }}" alt="">
-                    </div>
-                    <div class="caption">
-                        <span>{{ item.name }}</span>
+                <div class="tab-pane" id="{{ drUniqueName }}_2">
+                    <div class="content">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>External link</label>
+                                <input type="text"
+                                       class="form-control"
+                                       ng-model="dr.selectedItem"
+                                       placeholder="http://">
+                                <span class="help-block">The external asset url</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,6 +75,6 @@
     </div>
     <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-outline dark">Close</button>
-        <button type="button" class="btn green">Select</button>
+        <button type="button" class="btn green" ng-click="dr.selectMedia()">Select</button>
     </div>
 </div>

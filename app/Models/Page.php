@@ -33,6 +33,7 @@ class Page extends AbstractModel
         'description',
         'content',
         'status',
+        'thumbnail',
         'tags'
     ];
 

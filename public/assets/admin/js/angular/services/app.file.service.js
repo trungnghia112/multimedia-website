@@ -13,10 +13,12 @@
 
         return service;
 
-        function getFiles($folder, callback, callbackError) {
+        function getFiles($type, $folder, callback, callbackError) {
             if(!$folder) $folder = null;
+            if(!$type) $folder = 'image';
             return $http.post(baseApi + 'files', {
-                sub: $folder
+                sub: $folder,
+                type: $type
             }).then(callback, callbackError);
         }
     }
