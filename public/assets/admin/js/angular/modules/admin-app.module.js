@@ -3,10 +3,10 @@
     angular.module('app', []);
     angular
         .module('adminApp', [
+            'app',
             'ui.router',
             'ngCookies',
             'ngResource',
-            'app',
             'ngMessages',
             'ui.bootstrap',
             'ngSanitize',

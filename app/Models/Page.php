@@ -67,7 +67,7 @@ class Page extends AbstractModel
 
         foreach($data as $key => $row)
         {
-            if(in_array($key, static::$acceptableEditContent))
+            if(in_array($key, static::$acceptableEdit))
             {
                 $page->$key = $row;
 
@@ -83,6 +83,30 @@ class Page extends AbstractModel
             $result['error'] = false;
             $result['response_code'] = 200;
         }
+        return $result;
+    }
+
+    public static function updatePages($ids, $data)
+    {
+        $result = [
+            'error' => true,
+            'response_code' => 500
+        ];
+        foreach($data as $key => $row)
+        {
+            if(!in_array($key, static::$acceptableEdit))
+            {
+                unset($data[$key]);
+            }
+        }
+
+        $pages = static::whereIn('id', $ids);
+        if($pages->update($data))
+        {
+            $result['error'] = false;
+            $result['response_code'] = 200;
+        }
+
         return $result;
     }
 

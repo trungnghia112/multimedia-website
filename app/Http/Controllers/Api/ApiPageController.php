@@ -53,11 +53,14 @@ class ApiPageController extends BaseController
         return response()->json($this->data, $this->data['response_code']);
     }
 
-    public function postEditGlobal(Request $request, $id)
+    public function postEditGlobal(Request $request, $id = null)
     {
-        $data = $request->all();
-        $result = Page::updatePage($id, $data);
-        return response()->json($result, $result['response_code']);
+        if($request->get('is_group_action') == true)
+        {
+            return $this->_GroupAction($request);
+        }
+        $data = $request->except(['is_group_action', 'ids']);
+
     }
 
     public function postEdit(Request $request, $id, $language)
@@ -70,6 +73,39 @@ class ApiPageController extends BaseController
     public function deleteDelete(Request $request, $id)
     {
         $result = Page::deletePage($id);
+        return response()->json($result, $result['response_code']);
+    }
+
+    public function _GroupAction($request)
+    {
+        $result = [
+            'error' => true,
+            'response_code' => 500
+        ];
+
+        $ids = $request->get('ids');
+
+        if(!$ids) return response()->json($result, $result['response_code']);
+
+        $data = [];
+        switch($request->get('_group_action'))
+        {
+            case 'disable':
+            {
+                $data['status'] = 0;
+            } break;
+            case 'active':
+            {
+                $data['status'] = 1;
+            } break;
+            default:
+            {
+                /*No action*/
+                return response()->json($result, $result['response_code']);
+            } break;
+        }
+
+        $result = Page::updatePages($ids, $data);
         return response()->json($result, $result['response_code']);
     }
 }

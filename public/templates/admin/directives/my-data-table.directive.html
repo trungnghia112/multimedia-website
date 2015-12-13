@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div class="pull-left pagination-wrapper">
+            <uib-pagination
+                    previous-text="&lsaquo;"
+                    next-text="&rsaquo;"
+                    first-text="&laquo;"
+                    last-text="&raquo;"
+                    total-items="drTotalItems"
+                    items-per-page="drItemsPerPage"
+                    ng-model="drCurrentPage"
+                    ng-change="dr.onPaginationChanged()"
+                    max-size="drMaxSize"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    rotate="false">
+            </uib-pagination>
+        </div>
+        <div class="pull-left table-change-per-page">
+            <label>
+                &nbsp;View&nbsp;
+                <select class="form-control input-xs input-sm input-inline" ng-model="drItemsPerPage" ng-change="dr.onPerPageChanged()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="-1">All</option>
+                </select>
+                &nbsp;records&nbsp;|&nbsp;<span>Found total {{ drTotalItems }} records</span>
+            </label>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-12 text-right">
+        <div class="table-group-actions pull-right">
+            <span ng-if="dr.countSelected(drSelectedItems) > 0">{{ dr.countSelected(drSelectedItems) }} items selected &nbsp;</span>
+            <select class="table-group-action-input form-control input-inline input-small input-sm"
+                    ng-model="drCurrentGroupAction"
+                    ng-options="item.id as item.text for item in drGroupActions">
+
+            </select>
+            <button class="btn btn-sm green"
+                    ng-disabled="drCurrentGroupAction == null || dr.countSelected(drSelectedItems) < 1"
+                    mwl-confirm
+                    message="Are you sure?"
+                    confirm-text="Yes <i class='fa fa-check'></i>"
+                    cancel-text="No <i class='fa fa-times'></i>"
+                    placement="top"
+                    confirm-button-type="danger"
+                    cancel-button-type="success"
+                    on-confirm="dr.handleGroupActions()">
+                <i class="fa fa-check"></i> Submit
+            </button>
+        </div>
+    </div>
+</div>
+<div ng-transclude></div>
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div class="pull-left pagination-wrapper">
+            <uib-pagination
+                    previous-text="&lsaquo;"
+                    next-text="&rsaquo;"
+                    first-text="&laquo;"
+                    last-text="&raquo;"
+                    total-items="drTotalItems"
+                    items-per-page="drItemsPerPage"
+                    ng-model="drCurrentPage"
+                    ng-change="dr.onPaginationChanged()"
+                    max-size="drMaxSize"
+                    class="pagination-sm"
+                    boundary-links="true"
+                    rotate="false">
+            </uib-pagination>
+        </div>
+        <div class="pull-left table-change-per-page">
+            <label>
+                &nbsp;View&nbsp;
+                <select class="form-control input-xs input-sm input-inline" ng-model="drItemsPerPage" ng-change="dr.onPerPageChanged()">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="150">150</option>
+                    <option value="-1">All</option>
+                </select>
+                &nbsp;records&nbsp;|&nbsp;<span>Found total {{ drTotalItems }} records</span>
+            </label>
+        </div>
+    </div>
+</div>

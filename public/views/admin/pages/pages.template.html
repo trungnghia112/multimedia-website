@@ -9,63 +9,25 @@
         <div class="actions">
             <div class="btn-group btn-group-devided">
                 <button type="submit" class="btn btn-circle green font-white btn-default btn-sm">
-                    <i class="fa fa-check"></i> Update
+                    <i class="fa fa-check"></i> Create
                 </button>
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
             </div>
         </div>
     </div>
     <div class="portlet-body">
-        <div class="dataTables_wrapper dataTables_extended_wrapper no-footer table-wrapper">
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <div class="pull-left pagination-wrapper">
-                        <uib-pagination
-                                previous-text="&lsaquo;"
-                                next-text="&rsaquo;"
-                                first-text="&laquo;"
-                                last-text="&raquo;"
-                                total-items="vm.totalItems"
-                                items-per-page="vm.perPage"
-                                ng-model="vm.currentPage"
-                                ng-change="vm.paginationChanged()"
-                                max-size="vm.maxSize"
-                                class="pagination-sm"
-                                boundary-links="true"
-                                rotate="false">
-                        </uib-pagination>
-                    </div>
-                    <div class="pull-left table-change-per-page">
-                        <label>
-                            &nbsp;View&nbsp;
-                            <select class="form-control input-xs input-sm input-inline" ng-model="vm.perPage" ng-change="vm.perPageChanged()">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="150">150</option>
-                                <option value="-1">All</option>
-                            </select>
-                            &nbsp;records&nbsp;|&nbsp;<span>Found total {{ vm.totalItems }} records</span>
-                        </label>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12 text-right">
-                    <div class="table-group-actions pull-right">
-                        <span>4 items selected</span>
-                        <select class="table-group-action-input form-control input-inline input-small input-sm">
-                            <option value="">Select...</option>
-                            <option value="Cancel">Cancel</option>
-                            <option value="Cancel">Hold</option>
-                            <option value="Cancel">On Hold</option>
-                            <option value="Close">Close</option>
-                        </select>
-                        <button class="btn btn-sm green table-group-action-submit">
-                            <i class="fa fa-check"></i> Submit
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div my-data-table
+             dr-total-items="vm.totalItems"
+             dr-items-per-page="vm.perPage"
+             dr-current-page="vm.currentPage"
+             dr-pagination-changed="vm.paginationChanged()"
+             dr-max-size="vm.maxSize"
+             dr-per-page-changed="vm.perPageChanged()"
+             dr-selected-items="vm.selectedItems"
+             dr-group-actions="vm.groupActions"
+             dr-current-group-action="vm.drCurrentGroupAction"
+             dr-handle-group-actions="vm.handleGroupActions()"
+             class="dataTables_wrapper dataTables_extended_wrapper no-footer table-wrapper">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover vertical-middle">
                     <colgroup>
@@ -81,7 +43,11 @@
                         <th>
                             <label class="custom-checkbox">
                                 <div class="checker">
-                                    <input type="checkbox">
+                                    <input type="checkbox"
+                                           ng-model="vm.checkedAllItems"
+                                           ng-true-value="true"
+                                           ng-false-value="false"
+                                           ng-change="vm.multiSelect()">
                                     <span></span>
                                 </div>
                             </label>
@@ -98,7 +64,11 @@
                         <td>
                             <label class="custom-checkbox">
                                 <div class="checker">
-                                    <input type="checkbox" value="{{ item.id }}">
+                                    <input type="checkbox"
+                                           ng-model="vm.selectedItems[item.id]"
+                                           ng-checked="vm.selectedItems[item.id] == true"
+                                           ng-change="vm.changeSelect()"
+                                           value="{{ item.id }}">
                                     <span></span>
                                 </div>
                             </label>
@@ -161,47 +131,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="row">
-                <div class="col-md-8 col-sm-12">
-                    <div class="pull-left pagination-wrapper">
-                        <uib-pagination
-                                previous-text="&lsaquo;"
-                                next-text="&rsaquo;"
-                                first-text="&laquo;"
-                                last-text="&raquo;"
-                                total-items="vm.totalItems"
-                                items-per-page="vm.perPage"
-                                ng-model="vm.currentPage"
-                                ng-change="vm.paginationChanged()"
-                                max-size="vm.maxSize"
-                                class="pagination-sm"
-                                boundary-links="true"
-                                rotate="false">
-                        </uib-pagination>
-                    </div>
-                    <div class="pull-left table-change-per-page">
-                        <label>
-                            &nbsp;View&nbsp;
-                            <select class="form-control input-xs input-sm input-inline" ng-model="vm.perPage" ng-change="vm.perPageChanged()">
-                                <option value="10">10</option>
-                                <option value="20">20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                                <option value="150">150</option>
-                                <option value="-1">All</option>
-                            </select>
-                            &nbsp;records&nbsp;|&nbsp;<span>Found total {{ vm.totalItems }} records</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="portlet-title portlet-footer">
         <div class="actions">
             <div class="btn-group btn-group-devided">
                 <button type="submit" class="btn btn-circle green font-white btn-default btn-sm">
-                    <i class="fa fa-check"></i> Update
+                    <i class="fa fa-check"></i> Create
                 </button>
                 <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
             </div>

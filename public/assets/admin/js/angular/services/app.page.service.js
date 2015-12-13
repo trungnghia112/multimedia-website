@@ -17,14 +17,9 @@
 
         return service;
 
-        function getAll($paged, $perPage, callback, callbackError) {
-            if(!$paged) $paged = 1;
-            if(!$perPage) $perPage = 10;
+        function getAll($params, callback, callbackError) {
             return $http.get(baseApi + 'pages', {
-                params: {
-                    page: $paged,
-                    per_page: $perPage
-                }
+                params: $params || {}
             }).then(callback, callbackError);
         }
 
@@ -33,7 +28,11 @@
         }
 
         function updateGlobal($id, $data, callback, callbackError) {
-            return $http.post(baseApi + 'pages/edit-global/' + $id, $data).then(callback, callbackError);
+            if($id && $id.isNumeric())
+            {
+                return $http.post(baseApi + 'pages/edit-global/' + $id, $data).then(callback, callbackError);
+            }
+            return $http.post(baseApi + 'pages/edit-global', $data).then(callback, callbackError);
         }
 
         function update($id, $lang, $data, callback, callbackError) {
