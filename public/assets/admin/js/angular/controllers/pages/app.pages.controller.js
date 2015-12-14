@@ -180,7 +180,9 @@
                     page: vm.currentPage,
                     per_page: vm.perPage
                 });
+                MyHelpers.showNotification8(response.data.message, 'success');
             }, function (response) {
+                MyHelpers.showNotification8(response.data.message, 'error');
                 $rootScope.hideLoadingState();
             });
         }

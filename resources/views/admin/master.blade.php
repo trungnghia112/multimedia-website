@@ -25,6 +25,7 @@
     <!-- BEGIN PAGE LEVEL PLUGINS -->
     <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" />
     <link href="{{ url('theme/admin/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" />
+    <link href="{{ url('assets/admin/core/third_party/notific8/jquery.notific8.min.css', [], env('APP_HTTPS', false)) }}" rel="stylesheet" type="text/css" />
     <!-- END PAGE LEVEL PLUGINS -->
 
     <!-- BEGIN THEME GLOBAL STYLES -->
@@ -106,6 +107,7 @@
 <script src="{{ url('assets/admin/dist/core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <script src="{{ url('assets/admin/dist/angular-core.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <script src="{{ url('assets/admin/core/third_party/ckeditor/ckeditor.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
+<script src="{{ url('assets/admin/core/third_party/notific8/jquery.notific8.min.js', [], env('APP_HTTPS', false)) }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 
 <!-- BEGIN THEME GLOBAL SCRIPTS -->

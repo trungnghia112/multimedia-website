@@ -60,7 +60,8 @@ class Page extends AbstractModel
     {
         $result = [
             'error' => true,
-            'response_code' => 500
+            'response_code' => 500,
+            'message' => 'Some error occurred!'
         ];
         $page = static::find($id);
         if(!$page) return $result;
@@ -82,6 +83,7 @@ class Page extends AbstractModel
         {
             $result['error'] = false;
             $result['response_code'] = 200;
+            $result['message'] = 'Update page completed!';
         }
         return $result;
     }
@@ -90,7 +92,8 @@ class Page extends AbstractModel
     {
         $result = [
             'error' => true,
-            'response_code' => 500
+            'response_code' => 500,
+            'message' => 'Some error occurred!'
         ];
         foreach($data as $key => $row)
         {
@@ -105,6 +108,9 @@ class Page extends AbstractModel
         {
             $result['error'] = false;
             $result['response_code'] = 200;
+            $result['message'] = [
+                'Update pages completed!'
+            ];
         }
 
         return $result;
@@ -114,7 +120,8 @@ class Page extends AbstractModel
     {
         $result = [
             'error' => true,
-            'response_code' => 500
+            'response_code' => 500,
+            'message' => 'Some error occurred!'
         ];
 
         /*Update page content*/
@@ -136,6 +143,7 @@ class Page extends AbstractModel
         {
             $result['error'] = false;
             $result['response_code'] = 200;
+            $result['message'] = 'Update page completed!';
         }
         return $result;
     }
@@ -144,7 +152,8 @@ class Page extends AbstractModel
     {
         $result = [
             'error' => true,
-            'response_code' => 500
+            'response_code' => 500,
+            'message' => 'Some error occurred!'
         ];
         $page = static::find($id);
 
@@ -168,11 +177,13 @@ class Page extends AbstractModel
             {
                 $result['error'] = false;
                 $result['response_code'] = 200;
+                $result['message'] = ['Delete related content completed!'];
             }
-            if(!$page->delete())
+            if($page->delete())
             {
-                $result['error'] = true;
-                $result['response_code'] = 500;
+                $result['error'] = false;
+                $result['response_code'] = 200;
+                $result['message'] = ['Delete page completed!'];
             }
         }
         else

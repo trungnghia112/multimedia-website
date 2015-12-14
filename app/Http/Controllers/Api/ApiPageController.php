@@ -59,8 +59,9 @@ class ApiPageController extends BaseController
         {
             return $this->_GroupAction($request);
         }
-        $data = $request->except(['is_group_action', 'ids']);
-
+        $data = $request->except(['is_group_action', '_group_action', 'ids']);
+        $result = Page::updatePage($id, $data);
+        return response()->json($result, $result['response_code']);
     }
 
     public function postEdit(Request $request, $id, $language)
@@ -80,7 +81,8 @@ class ApiPageController extends BaseController
     {
         $result = [
             'error' => true,
-            'response_code' => 500
+            'response_code' => 500,
+            'message' => 'Some error occurred!'
         ];
 
         $ids = $request->get('ids');
@@ -101,6 +103,7 @@ class ApiPageController extends BaseController
             default:
             {
                 /*No action*/
+                $result['message'] = 'Not allowed task.';
                 return response()->json($result, $result['response_code']);
             } break;
         }
